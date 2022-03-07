@@ -7,54 +7,54 @@ import {
   Image,
   Pressable,
   Keyboard,
+  TouchableWithoutFeedback,
+  SafeAreaView,
 } from "react-native";
-import {signInService,
-   registerService,
-   forgetPasswordService,
-   onAuthStateChanged
-  } from "../../service/firebase/firebaseService";
+import { authentication } from "../../service/axiosService";
 
-const LoginPage = () => {
+const LoginPage = ({navigation}) => {
 
-  const [email,setEmail] = useState("");
+  const [username,setUsername] = useState("");
   const [password,SetPassword] = useState("");
   const [isLogingIn,setIsLogingIn] = useState(false);
   const [user,setUser] = useState();
 
-  const handleSignIn = () =>{
-    alert("email : "+email+"\n"+"Password : "+password)
-    signInService(email,password)
-    .then(() => {
-      let subscriber = onAuthStateChanged(onAuthStateChanges);
-      
-    })
-    .catch((err) => console.error(err.message))
-  }
-
-  function onAuthStateChanges(user){
-    setUser(user);
-    console.log(user)
-  }
+  const handleSignIn = async () =>{
+      /*await authentication({username:username, password:password}).then(res => {
+      console.log(res)
+      if(res.status != 200) return
+      setUser(res.data)
+      alert("success")
+      navigation.navigate("MainScreen");
+    }).catch(err => {
+      console.error(err)
+      alert("fail to authen") 
+    })  */
+    navigation.navigate("MainScreen"); 
+  } 
 
   const handleSignUp = () => {
-    registerService(email,password);
+    // registerService(username,password);
   }
 
   const handleForgetPassword = () =>{
-    forgetPasswordService(email);
+    navigation.navigate("ForgetPassScreen");
+    // forgetPasswordService(username);
   }
 
   return (
-    <View style={{ padding: 15 }}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <SafeAreaView style={styles.container}>
+      <View style={{ padding: 15 }}>
             <Image
         style={styles.logoImage}
         source={require("../../assets/logo/himitsu_logo.png")}
       />
-      <Text style={styles.text}>Email</Text>
+      <Text style={styles.text}>Username</Text>
       <TextInput
         style={styles.inputStyle}
-        placeholder="username@logizard.com"
-        onChangeText={(text) => setEmail(text)}
+        placeholder="Username"
+        onChangeText={(text) => setUsername(text)}
       />
       <Text style={styles.text}>Password</Text>
       <TextInput
@@ -98,12 +98,18 @@ const LoginPage = () => {
         Forget Password
       </Text>
     </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default LoginPage;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    justifyContent: "center",
+  },
   text: {
     textAlign: "left",
     marginBottom: 5,
@@ -145,3 +151,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+
+
+

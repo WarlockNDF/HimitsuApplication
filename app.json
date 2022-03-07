@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "logisticite",
-    "slug": "logisticite",
+    "name": "HimitsuApplication",
+    "slug": "HimitsuApplication",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

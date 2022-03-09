@@ -24,7 +24,6 @@ const Login = ({ navigation }) => {
             console.log(res.data.accessToken)
             if (res.status != 201) throw "UnAuthorize Exception"
             userStore.updateProfile(res.data)
-            alert("success")
             await AsyncStorage.setItem("@Token", res.data.accessToken)
             navigation.navigate("Landing");
             setLoading(false);

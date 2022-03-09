@@ -1,6 +1,6 @@
 import { StyleSheet, View, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select } from "native-base";
+import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select, ScrollView } from "native-base";
 import { AntDesign, CheckIcon } from "@expo/vector-icons";
 import http from "../../service/http";
 import ProductCard from '../element/ProductCard';
@@ -55,16 +55,18 @@ const Search = () => {
             </Select> */}
           </View>
           <View style={{ alignItems: 'center' }}>
-            {
-              products.map((product, index) => {
-                const { ProductID, ProductName, productType } = product;
-                return (
-                  <>
-                    <ProductCard key={ProductID} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
-                  </>
-                )
-              })
-            }
+            <ScrollView>
+              {
+                products.map((product, index) => {
+                  const { ProductID, ProductName, productType } = product;
+                  return (
+                    <>
+                      <ProductCard key={ProductID} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
+                    </>
+                  )
+                })
+              }
+            </ScrollView>
           </View>
         </VStack>
       </VStack>

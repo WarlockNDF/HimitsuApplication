@@ -26,8 +26,8 @@ import {
 const DashBoard = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, margin: 4 }}>
-        <Text>DashBoardx</Text>
+      <View style={{ flex: 1, margin: 4  , alignItems:'center'}}>
+        <Text style = {{fontSize:32, padding:60, fontWeight:'bold'}}>DASHBOARD</Text>
       </View>
       <View
         style={{
@@ -69,8 +69,8 @@ const DashBoard = ({navigation}) => {
                       <Text
                         color="red.800"
                         mt="3"
-                        fontWeight="medium"
-                        fontSize="xl"
+                        fontWeight="bold"
+                        fontSize="lg"
                         mb="3"
                       >
                         Nearly Expire
@@ -114,8 +114,8 @@ const DashBoard = ({navigation}) => {
                       <Text
                         color="coolGray.800"
                         mt="3"
-                        fontWeight="medium"
-                        fontSize="xl"
+                        fontWeight="bold"
+                        fontSize="lg"
                         mb="3"
                       >
                         Order
@@ -165,8 +165,8 @@ const DashBoard = ({navigation}) => {
                       <Text
                         color="yellow.800"
                         mt="3"
-                        fontWeight="medium"
-                        fontSize="xl"
+                        fontWeight="bold"
+                        fontSize="lg"
                         mb="3"
                       >
                         Low Stock
@@ -214,8 +214,8 @@ const DashBoard = ({navigation}) => {
                       <Text
                         color="coolGray.800"
                         mt="3"
-                        fontWeight="medium"
-                        fontSize="xl"
+                        fontWeight="bold"
+                        fontSize="lg"
                         mb="3"
                       >
                         Stock

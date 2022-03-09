@@ -1,1 +1,0 @@
-export const END_POINT = "https://lgz.herokuapp.com/";;

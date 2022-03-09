@@ -1,24 +1,60 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
 import DashBoard from './component/DashBoard';
 import Search from './component/Search';
 import Status from './component/Status';
 import Account from './component/Account';
+import NearlyExpire from './component/NearlyExpire';
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
 
+const DashboardRouter = ({ navigation }) => {
+    return (
+        <stackNav.Navigator
+            initialRouteName='dashboard'
+        >
+            <stackNav.Screen options={{
+                headerShown: false
+            }}
+                name="dashboard"
+                component={DashBoard}
+            />
+            <stackNav.Screen
+                options={{ title: "ของใกล้หมดอายุ" }}
+                name="checkExpire"
+                component={NearlyExpire}
+            />
+            <stackNav.Screen
+                options={{ title: "สั่งซื้อ" }}
+                name="orders"
+                component={NearlyExpire}
+            />
+            <stackNav.Screen
+                options={{ title: "ตรวจสอบ Stock เหลือน้อย" }}
+                name="lowStock"
+                component={NearlyExpire}
+            />
+            <stackNav.Screen
+                options={{ title: "ตรวจสอบ Stock" }}
+                name="checkStock"
+                component={NearlyExpire}
+            />
+        </stackNav.Navigator>
+    )
+}
+
 const Landing = () => {
     return (
-        <bottomTabNav.Navigator initialRouteName='Home'
+        <bottomTabNav.Navigator initialRouteName='home'
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarIcon: ({ focused, size, color }) => {
                     let iconName;
-                    if (route.name == 'dashboard') {
+                    if (route.name == 'home') {
                         iconName = 'home';
                         size = focused ? 25 : 20;
                     } else if (route.name == 'search') {
@@ -48,18 +84,18 @@ const Landing = () => {
             })}
         >
             <bottomTabNav.Screen
-                name='dashboard'
-                component={DashBoard}
+                name='home'
+                component={DashboardRouter}
             />
-             <bottomTabNav.Screen
+            <bottomTabNav.Screen
                 name='search'
                 component={Search}
             />
-             <bottomTabNav.Screen
+            <bottomTabNav.Screen
                 name='status'
                 component={Status}
             />
-             <bottomTabNav.Screen
+            <bottomTabNav.Screen
                 name='account'
                 component={Account}
             />

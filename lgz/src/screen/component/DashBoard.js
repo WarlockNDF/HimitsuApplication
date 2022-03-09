@@ -23,7 +23,7 @@ import {
   AntDesign,
 } from "@expo/vector-icons";
 
-const DashBoard = () => {
+const DashBoard = ({navigation}) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 4 }}>
@@ -38,7 +38,7 @@ const DashBoard = () => {
         }}
       >
         <View style={{ flexDirection: "row" }}>
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate("checkExpire")}>
             {({ isHovered, isFocused, isPressed }) => {
               return (
                 <Box
@@ -64,7 +64,7 @@ const DashBoard = () => {
                     ],
                   }}
                 >
-                  <VStack>
+                  <VStack >
                     <Center>
                       <Text
                         color="red.800"
@@ -75,7 +75,7 @@ const DashBoard = () => {
                       >
                         Nearly Expire
                       </Text>
-                      <AntDesign name="clockcircle" size={35} color="red" />
+                      <AntDesign name="clockcircle" size={35} color="red"/>
                     </Center>
                   </VStack>
                 </Box>
@@ -83,7 +83,7 @@ const DashBoard = () => {
             }}
           </Pressable>
 
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate("orders")}>
             {({ isHovered, isFocused, isPressed }) => {
               return (
                 <Box
@@ -134,7 +134,7 @@ const DashBoard = () => {
         </View>
 
         <View style={{ flexDirection: "row" }}>
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate("lowStock")}>
             {({ isHovered, isFocused, isPressed }) => {
               return (
                 <Box
@@ -183,7 +183,7 @@ const DashBoard = () => {
             }}
           </Pressable>
 
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate("checkStock")}>
             {({ isHovered, isFocused, isPressed }) => {
               return (
                 <Box

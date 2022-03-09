@@ -1,17 +1,41 @@
 import { StyleSheet, View, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading } from "native-base";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import http from "../../service/http";
 
 
 const Search = () => {
+
+  const [search, setSearch] = useState("");
+
+  const doSearch = async () => {
+    try {
+      const { status, data } = await http.get(search === "" ? 'product' : `product/${search}`)
+      if (status !== 200) throw "Can't Get Product"
+      console.log(data.data)
+    } catch (err) {
+      console.log(err.messsage)
+      alert("ไม่สามารถดึงข้อมูลได้")
+    }
+  }
+
+  useEffect(() => {
+    doSearch();
+  }, []);
+
   return (
     <SafeAreaView>
       <VStack>
         <VStack mt={10} w="100%" space={5} alignSelf="center">
           <Heading ml={5}>ค้นหาสินค้า</Heading>
-          <View style={{paddingLeft:10,paddingRight:10}}>
-            <Input placeholder="Search" InputRightElement={<Icon m="2" ml="3" size="6" color="gray.400" as={<MaterialIcons name="search" />} />} />
+          <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+            <Input onChangeText={value => setSearch(value)} placeholder="Search" InputRightElement={
+              <IconButton colorScheme="info" key={"ghost"} variant={"ghost"} _icon={{
+                as: AntDesign,
+                name: "search1"
+              }} />}
+            />
           </View>
         </VStack>
       </VStack>

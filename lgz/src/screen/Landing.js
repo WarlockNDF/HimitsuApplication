@@ -8,6 +8,9 @@ import Search from './component/Search';
 import Status from './component/Status';
 import Account from './component/Account';
 import NearlyExpire from './component/NearlyExpire';
+import Order from './component/Order';
+import LowStockItems from './component/LowStockItems';
+import StockItems from './component/StockItems';
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -31,17 +34,17 @@ const DashboardRouter = ({ navigation }) => {
             <stackNav.Screen
                 options={{ title: "สั่งซื้อ" }}
                 name="orders"
-                component={NearlyExpire}
+                component={Order}
             />
             <stackNav.Screen
                 options={{ title: "ตรวจสอบ Stock เหลือน้อย" }}
                 name="lowStock"
-                component={NearlyExpire}
+                component={LowStockItems}
             />
             <stackNav.Screen
                 options={{ title: "ตรวจสอบ Stock" }}
                 name="checkStock"
-                component={NearlyExpire}
+                component={StockItems}
             />
         </stackNav.Navigator>
     )

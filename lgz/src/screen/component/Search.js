@@ -9,7 +9,7 @@ const Search = () => {
     <SafeAreaView>
       <VStack>
         <VStack mt={10} w="100%" space={5} alignSelf="center">
-          <Heading ml={10}>ค้นหาสินค้า</Heading>
+          <Heading ml={5}>ค้นหาสินค้า</Heading>
           <View style={{paddingLeft:10,paddingRight:10}}>
             <Input placeholder="Search" InputRightElement={<Icon m="2" ml="3" size="6" color="gray.400" as={<MaterialIcons name="search" />} />} />
           </View>

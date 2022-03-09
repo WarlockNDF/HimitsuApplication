@@ -5,7 +5,7 @@ import UserProvider from './src/context/UserProvider';
 import Login from './src/screen/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import DashBoard from './src/screen/component/DashBoard';
+import Landing from './src/screen/Landing';
 
 
 let Stack = createStackNavigator();
@@ -27,7 +27,7 @@ export default function App() {
             <Stack.Screen
             options={{headerShown: false,  gestureEnabled:false}}
             name="Landing"
-            component={DashBoard}
+            component={Landing}
             />
           </Stack.Navigator>
         </NavigationContainer>

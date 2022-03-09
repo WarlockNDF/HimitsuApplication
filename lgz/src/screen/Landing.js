@@ -4,6 +4,12 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack';
 import DashBoard from './component/DashBoard';
+<<<<<<< HEAD
+=======
+import Search from './component/Search';
+import Status from './component/Status';
+import Account from './component/Account';
+>>>>>>> parent of f7ea11b (Merge branch 'main' of https://github.com/WarlockNDF/HimitsuApplication)
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -47,6 +53,21 @@ const Landing = () => {
             <bottomTabNav.Screen
                 name='dashboard'
                 component={DashBoard}
+<<<<<<< HEAD
+=======
+            />
+             <bottomTabNav.Screen
+                name='search'
+                component={Search}
+            />
+             <bottomTabNav.Screen
+                name='status'
+                component={Status}
+            />
+             <bottomTabNav.Screen
+                name='account'
+                component={Account}
+>>>>>>> parent of f7ea11b (Merge branch 'main' of https://github.com/WarlockNDF/HimitsuApplication)
             />
         </bottomTabNav.Navigator>
     )

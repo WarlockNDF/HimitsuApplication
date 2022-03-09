@@ -1,27 +1,6 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button, Item } from 'native-base';
-//import http from "../service/axiosService"
-
-// const Stockitems = () => {
-
-//   const [product, setProduct] = useState([]);
-
-//   const searchAll = async () => {
-//     try {
-//       const { status, data } = await http.get('product')
-//       if (status !== 200) throw "No Such Product"
-//       console.log(data.data);
-//       setProduct(data.data);
-//     } catch (err) {
-//       alert(err.message)
-//       console.error(err.message);
-//     }
-//   }
-
-//   useEffect(() => {
-//     searchAll();
-//   }, [])
 
 const StockItems = () => {
   return (

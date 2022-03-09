@@ -35,6 +35,8 @@ const Login = ({ navigation }) => {
             await AsyncStorage.setItem("@Token", res.data.accessToken)
             navigation.navigate("Landing");
             setLoading(false);
+            setUsername("")
+            SetPassword("")
         }).catch(err => {
             console.error(err)
             setLoading(false);

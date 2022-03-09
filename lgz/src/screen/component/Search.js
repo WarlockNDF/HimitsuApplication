@@ -32,6 +32,10 @@ const Search = () => {
 
   useEffect(() => {
     doSearch();
+    return () => {
+      setSearch("")
+      setProducts([]);
+    }
   }, []);
 
   return (
@@ -40,7 +44,7 @@ const Search = () => {
         <VStack mt={10} w="100%" space={5} alignSelf="center">
           <Heading ml={5}>ค้นหาสินค้า</Heading>
           <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-            <Input onChangeText={value => setSearch(value)} placeholder="Search" InputRightElement={
+            <Input onSubmitEditing={() => doSearch()} onChangeText={value => setSearch(value)} placeholder="Search" InputRightElement={
               <IconButton onPress={() => doSearch()} colorScheme="info" key={"ghost"} variant={"ghost"} _icon={{
                 as: AntDesign,
                 name: "search1"
@@ -61,7 +65,7 @@ const Search = () => {
                   const { ProductID, ProductName, productType } = product;
                   return (
                     <>
-                      <ProductCard key={ProductID} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
+                      <ProductCard key={ProductID+index} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
                     </>
                   )
                 })

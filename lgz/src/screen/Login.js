@@ -8,17 +8,20 @@ import {
 } from "react-native";
 import { VStack, FormControl, Input, Button} from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import http from "../service/http"
+import { userContext } from '../context/UserProvider';
 
 const Login = ({ navigation }) => {
 
     const [username, setUsername] = useState("");
     const [password, SetPassword] = useState("");
+    const userStore = React.useContext(userContext);
 
     const handleSignIn = async () => {
         await http.post('user/auth', { username: username, password: password }).then(async (res) => {
             console.log(res.data.accessToken)
             if (res.status != 201) throw "UnAuthorize Exception"
-            setUser(res.data)
+            userStore.updateProfile(res.data)
             alert("success")
             await AsyncStorage.setItem("@Token", res.data.accessToken)
             //navigation.navigate("MainScreen");
@@ -44,7 +47,7 @@ const Login = ({ navigation }) => {
                         <FormControl.Label>Password</FormControl.Label>
                         <Input onChangeText={value => SetPassword(value)} type="password" />
                     </FormControl>
-                    <Button mt="2">
+                    <Button mt="2" onPress={() => handleSignIn()}>
                         Sign in
                     </Button>
                 </VStack>

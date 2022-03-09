@@ -6,7 +6,7 @@ import {
     TouchableWithoutFeedback,
     SafeAreaView,
 } from "react-native";
-import { VStack, FormControl, Input, Button} from "native-base";
+import { VStack, FormControl, Input, Button } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import http from "../service/http"
 import { userContext } from '../context/UserProvider';
@@ -15,18 +15,22 @@ const Login = ({ navigation }) => {
 
     const [username, setUsername] = useState("");
     const [password, SetPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const userStore = React.useContext(userContext);
 
     const handleSignIn = async () => {
+        setLoading(!loading);
         await http.post('user/auth', { username: username, password: password }).then(async (res) => {
             console.log(res.data.accessToken)
             if (res.status != 201) throw "UnAuthorize Exception"
             userStore.updateProfile(res.data)
             alert("success")
             await AsyncStorage.setItem("@Token", res.data.accessToken)
-            //navigation.navigate("MainScreen");
+            navigation.navigate("Landing");
+            setLoading(false);
         }).catch(err => {
             console.error(err)
+            setLoading(false);
             alert("fail to authen")
         })
     }
@@ -38,7 +42,7 @@ const Login = ({ navigation }) => {
                     style={styles.logoImage}
                     source={require("../../assets/logo/himitsu_logo.png")}
                 />
-                <VStack space={3} mt="5">
+                <VStack space={3} mt="5" p={15}>
                     <FormControl>
                         <FormControl.Label>Username</FormControl.Label>
                         <Input onChangeText={value => setUsername(value)} />
@@ -47,7 +51,12 @@ const Login = ({ navigation }) => {
                         <FormControl.Label>Password</FormControl.Label>
                         <Input onChangeText={value => SetPassword(value)} type="password" />
                     </FormControl>
-                    <Button mt="2" onPress={() => handleSignIn()}>
+                    <Button isLoading={loading} _loading={{
+                        bg: "primary.300",
+                        _text: {
+                            color: "black"
+                        }
+                    }} isLoadingText='กำลังเข้าสู่ระบบ' mt="2" onPress={() => handleSignIn()}>
                         Sign in
                     </Button>
                 </VStack>
@@ -61,8 +70,10 @@ export default Login
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff",
-        justifyContent: "center"
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
         textAlign: "left",

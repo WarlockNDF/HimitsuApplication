@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
     StyleSheet,
     Image,
     Keyboard,
     TouchableWithoutFeedback,
     SafeAreaView,
+    KeyboardAvoidingView
 } from "react-native";
 import { VStack, FormControl, Input, Button } from "native-base";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,7 +19,14 @@ const Login = ({ navigation }) => {
     const [loading, setLoading] = useState(false);
     const userStore = React.useContext(userContext);
 
+    const usernameInputRef = useRef()
+    const passwordInputRef = useRef()
+
     const handleSignIn = async () => {
+        if(!username || !password) {
+            alert("กรุณากรอกข้อมูลให้ครบด้วยครับ")
+            return
+        }
         setLoading(!loading);
         await http.post('user/auth', { username: username, password: password }).then(async (res) => {
             console.log(res.data.accessToken)
@@ -35,32 +43,37 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <SafeAreaView style={styles.container}>
-                <Image
-                    style={styles.logoImage}
-                    source={require("../../assets/logo/himitsu_logo.png")}
-                />
-                <VStack space={3} mt="5" p={15}>
-                    <FormControl>
-                        <FormControl.Label>Username</FormControl.Label>
-                        <Input onChangeText={value => setUsername(value)} />
-                    </FormControl>
-                    <FormControl>
-                        <FormControl.Label>Password</FormControl.Label>
-                        <Input onChangeText={value => SetPassword(value)} type="password" />
-                    </FormControl>
-                    <Button isLoading={loading} _loading={{
-                        bg: "primary.300",
-                        _text: {
-                            color: "black"
-                        }
-                    }} isLoadingText='กำลังเข้าสู่ระบบ' mt="2" onPress={() => handleSignIn()}>
-                        Sign in
-                    </Button>
-                </VStack>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <SafeAreaView style={styles.container}>
+                    <Image
+                        style={styles.logoImage}
+                        source={require("../../assets/logo/himitsu_logo.png")}
+                    />
+                    <VStack space={3} mt="5" p={15}>
+                        <FormControl>
+                            <FormControl.Label>Username</FormControl.Label>
+                            <Input ref={usernameInputRef} onSubmitEditing={() => { passwordInputRef.current.focus() }} onChangeText={value => setUsername(value)} />
+                        </FormControl>
+                        <FormControl>
+                            <FormControl.Label>Password</FormControl.Label>
+                            <Input ref={passwordInputRef} onSubmitEditing={() => handleSignIn()} onChangeText={value => SetPassword(value)} type="password" />
+                        </FormControl>
+                        <Button isLoading={loading} _loading={{
+                            bg: "primary.300",
+                            _text: {
+                                color: "black"
+                            }
+                        }} isLoadingText='กำลังเข้าสู่ระบบ' mt="2" onPress={() => handleSignIn()}>
+                            Sign in
+                        </Button>
+                    </VStack>
+                </SafeAreaView>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     );
 
 }

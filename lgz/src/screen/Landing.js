@@ -11,6 +11,7 @@ import { StyleSheet, Text, View } from "react-native";
 import LowStockItems from "./component/LowStockItems";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ProductDetail from "./component/ProductDetail";
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -48,6 +49,22 @@ const DashboardRouter = ({ navigation }) => {
     </stackNav.Navigator>
   );
 };
+
+// const SearchRouter = ({ navigation  }) => {
+//   return (
+//     <stackNav.Navigator initialRouteName="Search">
+//       <stackNav.Screen
+//         name="search"
+//         component={Search}
+//       />
+//       <stackNav.Screen
+//         name="productdetail"
+//         component={ProductDetail}
+//       />
+//     </stackNav.Navigator>
+//   );
+// };
+
 
 const Landing = () => {
   return (

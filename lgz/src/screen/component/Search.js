@@ -25,11 +25,9 @@ const Search = () => {
 
   const doSearch = async () => {
     try {
-      const { status, data } = await http.get(
-        search === "" ? "stock" : `stock/${search}`
-      );
-      if (status !== 200) throw "Can't Get Product";
-      setProducts([...data.data]);
+      const { status, data } = await http.get(search === "" ? 'stock' : `stock/${search}`)
+      if (status !== 200) throw "Can't Get Product"
+      setProducts([...data.data])
       console.log(`set Product Logs: ${products}`);
     } catch (err) {
       console.log(err.messsage);
@@ -76,23 +74,19 @@ const Search = () => {
               <Select.Item key={"stock"} label="stock" value="stock" />
             </Select> */}
           </View>
-          <View style={{ alignItems: "center" }}>
-            <ScrollView maxH={"xl"}>
-              {products.map((productinf, index) => {
-                const { StockID, Quantity, BBE } = productinf;
-                console.log(BBE);
-                return (
-                  <>
-                    <ProductCard
-                      key={productinf.product.ProductID + StockID + index}
-                      name={productinf.product.ProductName}
-                      typeName={productinf.product.productType.TypeName}
-                      numberOfStock={Quantity}
-                      bbe={BBE}
-                    />
-                  </>
-                );
-              })}
+          <View style={{ alignItems: 'center' }}>
+            <ScrollView>
+              {
+                products.map((productinf, index) => {
+                  const { StockID, Quantity, BBE } = productinf;
+                  console.log(BBE);
+                  return (
+                    <>
+                      <ProductCard key={productinf.product.ProductID+StockID+index} name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} numberOfStock={Quantity} bbe={BBE} />
+                    </>
+                  )
+                })
+              }
             </ScrollView>
           </View>
         </VStack>

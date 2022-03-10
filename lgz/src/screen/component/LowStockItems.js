@@ -10,7 +10,7 @@ const LowStockItems = ()=> {
 
   const getData = async () => {
     try {
-      const { status, data } = await http.get('stock')
+      const { status, data } = await http.get('stock/lowstocks')
       if (status !== 200) throw "No Such Product"
       console.log(data.data);
       setLowStock(data.data);

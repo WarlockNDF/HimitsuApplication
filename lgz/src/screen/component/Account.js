@@ -1,101 +1,153 @@
-import { Pressable, StyleSheet,  View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { Text,Button, Center } from 'native-base'
+import {
+  Pressable,
+  StyleSheet,
+  Image,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, Button, Center } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import http from "../../service/http";
 
-const Account = ({navigation}) => {
-    const [UserData, setUserData] = useState([]);
-    const getData = async () => {
-        try {
-          const { status, data } = await http.get('user')
-          if (status !== 200) throw "No data user found"
-          console.log(data.data);
-          setUserData(data.data);
-        } catch (err) {
-          alert(err.message)
-          console.error(err.message);
-        }
-      }
-   
-    useEffect(() => {
-      getData();
-    }, []);
-    return (
-        <SafeAreaView >
-            <View style={{backgroundColor:"fff",margin: 10,borderRadius:10, justifyContent: "center"}}>
-                <Text style={{fontSize:24, marginTop:30}}>Account Manager</Text>
-            </View>
-            <View style={styles.container}>
-            <Text style={styles.text}>
-            {'\t Store Name : '}
-            {'\n'}
-            {`\t _storename`}
-            </Text>
-            <Text></Text>
-            <View style={styles.line} />
-            <Text></Text>
+const Account = ({ navigation }) => {
+  const [UserData, setUserData] = useState([]);
+  const getData = async () => {
+    try {
+      const { status, data } = await http.get("user");
+      if (status !== 200) throw "No data user found";
+      console.log(data.data);
+      setUserData(data.data);
+    } catch (err) {
+      alert(err.message);
+      console.error(err.message);
+    }
+  };
 
-            <Text style={styles.text}>
-            {'\t Name : '}
-            {'\n'}
-            {`\t name`}
-            </Text>
-            <Text></Text>
-            <View style={styles.line} />
-            <Text></Text>
-            <Text style={styles.text}>
-            {'\t Role : '}
-            {'\n'}
-            {'\t Store Manager '}
-            </Text>
-            <View style={styles.line} />
-            <Button style={{marginTop:30}} onPress={() => {
-                    navigation.navigate('LoginScreen');
-                }} >
-                    <Text > test log out</Text>
-            </Button>
-            </View>
-        </SafeAreaView>  
-    )
-}
+  useEffect(() => {
+    getData();
+  }, []);
+  return (
+    // <SafeAreaView >
+    //     <View style={{backgroundColor:"fff",margin: 10,borderRadius:10, alignItems:"center"}}>
+    //         <Text style={{fontSize:24, marginTop:30, fontWeight:'bold'}}>Account Manager</Text>
+    //     </View>
 
-export default Account
+    //     <View style={styles.container}>
+    //     <Text style={styles.text}>
+    //     {'\t Store Name : '}
+    //     {'\n'}
+    //     {`\t _storename`}
+    //     </Text>
+    //     <Text></Text>
+    //     <View style={styles.line} />
+    //     <Text></Text>
+
+    //     <Text style={styles.text}>
+    //     {'\t Name : '}
+    //     {'\n'}
+    //     {`\t name`}
+    //     </Text>
+    //     <Text></Text>
+    //     <View style={styles.line} />
+    //     <Text></Text>
+    //     <Text style={styles.text}>
+    //     {'\t Role : '}
+    //     {'\n'}
+    //     {'\t Store Manager '}
+    //     </Text>
+    //     <View style={styles.line} />
+    //     <Button style={{marginTop:30}} onPress={() => {
+    //             navigation.navigate('LoginScreen');
+    //         }} >
+    //             <Text > test log out</Text>
+    //     </Button>
+    //     </View>
+    // </SafeAreaView>
+    <View style={styles.container}>
+      <View style={styles.header}></View>
+      <Image
+        style={styles.avatar}
+        source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
+      />
+      <View style={styles.body}>
+        <View style={{alignItems:'center' , marginTop:40}}>
+          <Text style={styles.name}>John Doe</Text>
+          <Text style={styles.info}>UX Designer / Mobile developer</Text>
+          <Text style={styles.description}>
+            Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
+            electram expetendis, omittam deseruisse consequuntur ius an,
+          </Text>
+          <View style={styles.bodyContent}>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Opcion 1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text>Opcion 2</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default Account;
 
 const styles = StyleSheet.create({
-    background: {
-      backgroundColor: '#6495ED',
-      borderRadius: 1,
-      borderRadius: 5,
-      height: 370,
-    },
-    heading: {
-      fontSize: 35,
-      textAlign: 'center',
-      alignItems: 'center',
-      backgroundColor: '#6495ED',
-      borderRadius: 1,
-      fontWeight: 'bold',
-      margin: 10,
-      color: '#FDFEFE',
-    },
-    container: {
-      height: 500,
-      marginTop: 10,
-      marginLeft: 20,
-      padding: 10,
-      marginRight: 20,
-      backgroundColor: '#FDFEFE',
-      borderRadius: 10,
-    },
-    text: {
-      color: '#000',
-      fontSize: 20,
-    },
-    line: {
-      borderBottomColor: 'black',
-      borderBottomWidth: 1,
-    },
-  
-  });
-
+  header: {
+    backgroundColor: "#6495ED",
+    height: 200,
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom: 30,
+    alignSelf: "center",
+    position: "absolute",
+    marginTop: 130,
+  },
+  name: {
+    fontSize: 22,
+    color: "#FFFFFF",
+    fontWeight: "600",
+  },
+  body: {
+    marginTop: 40,
+  },
+  bodyContent: {
+    flex: 1,
+    alignItems: "center",
+    padding: 30,
+  },
+  name: {
+    fontSize: 28,
+    color: "#696969",
+    fontWeight: "600",
+  },
+  info: {
+    fontSize: 16,
+    color: "#6495ED",
+    marginTop: 10,
+  },
+  description: {
+    fontSize: 16,
+    color: "#696969",
+    marginTop: 10,
+    textAlign: "center",
+  },
+  buttonContainer: {
+    marginTop: 10,
+    height: 45,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+    backgroundColor: "#00BFFF",
+  },
+});

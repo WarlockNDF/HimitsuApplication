@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Heading,
@@ -15,19 +14,22 @@ import {
   Flex,
   Badge,
 } from "native-base";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
 import {
   Ionicons,
   MaterialCommunityIcons,
   AntDesign,
 } from "@expo/vector-icons";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const DashBoard = ({navigation}) => {
+const DashBoard = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, margin: 4  , alignItems:'center'}}>
-        <Text style = {{fontSize:32, padding:60, fontWeight:'bold'}}>DASHBOARD</Text>
+      <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
+        <Text style={{ fontSize: 32, padding: 60, fontWeight: "bold" }}>
+          DASHBOARD
+        </Text>
       </View>
       <View
         style={{
@@ -64,7 +66,7 @@ const DashBoard = ({navigation}) => {
                     ],
                   }}
                 >
-                  <VStack >
+                  <VStack>
                     <Center>
                       <Text
                         color="red.800"
@@ -75,7 +77,7 @@ const DashBoard = ({navigation}) => {
                       >
                         Nearly Expire
                       </Text>
-                      <AntDesign name="clockcircle" size={35} color="red"/>
+                      <AntDesign name="clockcircle" size={35} color="red" />
                     </Center>
                   </VStack>
                 </Box>
@@ -242,7 +244,7 @@ export default DashBoard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     flexDirection: "row",
+    justifyContent: "center",
   },
 });

@@ -1,35 +1,46 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button, Item } from 'native-base';
+import { StyleSheet, View, SafeAreaView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select, ScrollView } from "native-base";
+import http from "../../service/http";
+import ProductCard from '../element/ProductCard';
 
 const StockItems = () => {
+
+  const [products, setProduct] = useState([]);
+
+  const searchAll = async () => {
+    try {
+      const { status, data } = await http.get('product')
+      if (status !== 200) throw "No Such Product"
+      console.log(data.data);
+      setProduct(data.data);
+    } catch (err) {
+      alert(err.message)
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    searchAll();
+  }, [])
+
   return (
-    <View>
-    <View style = {styles.container}>
-      <FlatList 
-        data={product}
-        keyExtractor={(item, index) => item.ProductID}
-        renderItem={({ item }) => (
-          <List>
-            <ListItem thumbnail >
-              {/* <Left>
-                <Thumbnail square source={{ uri: item.picture }} />
-              </Left> */}
-              <Body>
-                <Text>{item.ProductName}</Text>
-                <Text note numberOfLines={1}>{item.productType.TypeName}</Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-          </List>
-        )}
-      />
-    </View>
-    </View>
+    <SafeAreaView>
+    <View style={{ alignItems: 'center' }}>
+            <ScrollView>
+              {
+                products.map((product, index) => {
+                  const { ProductID, ProductName, productType } = product;
+                  return (
+                    <>
+                      <ProductCard key={ProductID+index} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
+                    </>
+                  )
+                })
+              }
+            </ScrollView>
+          </View>
+          </SafeAreaView>
   )
 }
 

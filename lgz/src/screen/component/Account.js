@@ -17,10 +17,11 @@ const Account = ({navigation}) => {
           console.error(err.message);
         }
       }
-    getData();
-     
+   
+    useEffect(() => {
+      getData();
+    }, []);
     return (
-        
         <SafeAreaView >
             <View style={{backgroundColor:"fff",margin: 10,borderRadius:10, justifyContent: "center"}}>
                 <Text style={{fontSize:24, marginTop:30}}>Account Manager</Text>
@@ -29,7 +30,7 @@ const Account = ({navigation}) => {
             <Text style={styles.text}>
             {'\t Store Name : '}
             {'\n'}
-            {`\t ${UserData.userDetail.storeName}`}
+            {`\t _storename`}
             </Text>
             <Text></Text>
             <View style={styles.line} />
@@ -38,7 +39,7 @@ const Account = ({navigation}) => {
             <Text style={styles.text}>
             {'\t Name : '}
             {'\n'}
-            {`\t ${UserData.userDetail.firstname} ${UserData.userDetail.lastname}`}
+            {`\t name`}
             </Text>
             <Text></Text>
             <View style={styles.line} />

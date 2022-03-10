@@ -15,16 +15,13 @@ const StockCard = ({ name, typeName, numberOfStock }) => {
           }]
         }}>
           <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-            {`ชื่อสินค้า : `+name}
+            {`Name : `+name}
           </Text>
           <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xs">
-            {`ชื่อประเภทสินค้า : `+typeName}
+            {`Type : `+typeName}
           </Text>
           <Text mt="2" fontSize="sm" color="coolGray.700">
-            {`จำนวนสินค้า: `+numberOfStock}
-          </Text>
-          <Text mt="2" fontSize="sm" color="coolGray.700">
-            {"ราคาของสินค้า: "}$12,850.05
+            {`Quantity : `+numberOfStock}
           </Text>
           <Flex>
             <Badge colorScheme={numberOfStock === 0? "danger" :"Blue"} _text={{

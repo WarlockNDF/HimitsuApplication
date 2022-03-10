@@ -27,22 +27,22 @@ const DashboardRouter = ({ navigation }) => {
                 component={DashBoard}
             />
             <stackNav.Screen
-                options={{ title: "ของใกล้หมดอายุ" }}
+                options={{ title: "NEARLY EXPIRE" }}
                 name="checkExpire"
                 component={NearlyExpire}
             />
             <stackNav.Screen
-                options={{ title: "สั่งซื้อ" }}
+                options={{ title: "ORDERS" }}
                 name="orders"
                 component={Order}
             />
             <stackNav.Screen
-                options={{ title: "ตรวจสอบ Stock เหลือน้อย" }}
+                options={{ title: "LOW STOCKS" }}
                 name="lowStock"
                 component={LowStockItems}
             />
             <stackNav.Screen
-                options={{ title: "ตรวจสอบ Stock" }}
+                options={{ title: "STOCK ITEMS" }}
                 name="checkStock"
                 component={StockItems}
             />

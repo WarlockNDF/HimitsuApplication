@@ -1,16 +1,49 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList ,SafeAreaView} from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Left, Body, Right, Button, Item } from 'native-base';
-//import http from "../service/axiosService"
+import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select, ScrollView } from 'native-base';
+import http from "../../service/http";
+import StockCard from '../element/StockCard';
 
+const LowStockItems = ()=> {
+  
+  const [lowstocks, setLowStock] = useState([]);
 
-const LowStockItems = () => {
+  const getData = async () => {
+    try {
+      const { status, data } = await http.get('stock')
+      if (status !== 200) throw "No Such Product"
+      console.log(data.data);
+      setLowStock(data.data);
+    } catch (err) {
+      alert(err.message)
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [])
+  
   return (
-    <View>
-    
-    </View>
+    <SafeAreaView>
+    <View style={{ alignItems: 'center' }}>
+            <ScrollView>
+              {
+                lowstocks.map((lowstock, index) => {
+                  const { StockID, product, Quantity} = lowstock;
+                  return (
+                  <>
+                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity}/>
+                  </>
+                  )
+                })
+              }
+            </ScrollView>
+          </View>
+          </SafeAreaView>
   )
 }
+    
 
 export default LowStockItems
 

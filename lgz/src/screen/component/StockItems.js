@@ -10,10 +10,11 @@ const StockItems = () => {
 
   const getData = async () => {
     try {
-      const { status, data } = await http.get('stock')
+      const { status, data } = await http.get('stock/findall')
       if (status !== 200) throw "No Such Product"
       console.log(data.data);
       setStock(data.data);
+      alert(JSON.stringify(data.data));
     } catch (err) {
       alert(err.message)
       console.error(err.message);
@@ -30,10 +31,10 @@ const StockItems = () => {
             <ScrollView>
               {
                 stocks.map((stock, index) => {
-                  const { ProductID, ProductName,productType,Quantity} = stock;
+                  const { StockID, Quantity, product, productType} = stock;
                   return (
                     <>
-                      <ProductCard key={ProductID+index} name={ProductName} typeName={productType} numberOfStock={Quantity} />
+                      {/*<ProductCard key={StockID+index} name={product.ProductName} typeName={productType.TypeName} numberOfStock={Quantity} />*/}
                     </>
                   )
                 })

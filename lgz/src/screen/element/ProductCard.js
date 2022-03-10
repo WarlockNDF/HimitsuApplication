@@ -17,20 +17,27 @@ const ProductCard = ({ name, typeName, numberOfStock, bbe = "" }) => {
             scale: isPressed ? 0.96 : 1
           }]
         }}>
-          <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xl">
-            {`ชื่อสินค้า : ` + name}
+          
+          <Text color="coolGray.800" mt="2" fontWeight="medium" fontSize="xl">
+            {`Name: ` + name}
           </Text>
-          <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xs">
-            {`ชื่อประเภทสินค้า : ` + typeName}
+          
+          <Text color="coolGray.800" mt="2" fontWeight="medium" fontSize="xs">
+            {`Type: ` + typeName}
+          </Text>
+          <Text 
+            color="darkBlue.800"
+            mt="4"
+            mr="2"
+            fontSize="md"
+          >
+            {`Quantity: ` + numberOfStock}
           </Text>
           <Text mt="2" fontSize="sm" color="coolGray.700">
-            {`จำนวนสินค้า: ` + numberOfStock}
+            {"BBE: "+ !bbe? "ไม่มีการระบุ" : moment(bbe).format("LLL").toString()}
           </Text>
           <Text mt="2" fontSize="sm" color="coolGray.700">
-            {"วันหมดอายุ: "+ !bbe? "ไม่มีการระบุ" : moment(bbe).format("LLL").toString()}
-          </Text>
-          <Text mt="2" fontSize="sm" color="coolGray.700">
-            {"Price : "}$12,850.05
+            {"Price: "}$12,850.05
           </Text>
           <Flex>
             <Badge colorScheme={numberOfStock === 0 ? "danger" : "Blue"} _text={{

@@ -57,7 +57,7 @@ const StockCard = ({ name, typeName, numberOfStock }) => {
                 {`Quantity : ` + numberOfStock}
               </Text>
             </HStack>
-            <Text color="coolGray.800" mt="3" fontWeight="medium" fontSize="xs">
+            <Text color="coolGray.800" mt="2" fontWeight="medium" fontSize="xs" mb="2">
               {`Type : ` + typeName}
             </Text>
             <Flex>

@@ -13,15 +13,8 @@ const Search = () => {
 
   const doSearch = async () => {
     try {
-      const { status, data } = await http.get(search === "" ? 'product' : `product/${search}`)
+      const { status, data } = await http.get(search === "" ? 'stock' : `stock/${search}`)
       if (status !== 200) throw "Can't Get Product"
-      if (search !== "") {
-        let temp = [];
-        temp.push(data.data)
-        setProducts(temp)
-        console.log(`set Product Logs: ${products}`);
-        return;
-      }
       setProducts([...data.data])
       console.log(`set Product Logs: ${products}`);
     } catch (err) {
@@ -61,11 +54,12 @@ const Search = () => {
           <View style={{ alignItems: 'center' }}>
             <ScrollView>
               {
-                products.map((product, index) => {
-                  const { ProductID, ProductName, productType } = product;
+                products.map((productinf, index) => {
+                  const { StockID, Quantity, BBE } = productinf;
+                  console.log(BBE);
                   return (
                     <>
-                      <ProductCard key={ProductID+index} name={ProductName} typeName={productType.TypeName} numberOfStock={15} />
+                      <ProductCard key={productinf.product.ProductID+StockID+index} name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} numberOfStock={Quantity} bbe={BBE} />
                     </>
                   )
                 })

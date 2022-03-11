@@ -19,7 +19,7 @@ import React, { useEffect, useState } from "react";
 import { AntDesign, CheckIcon } from "@expo/vector-icons";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 
-const Search = () => {
+const Search = ({navigation}) => {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -82,7 +82,7 @@ const Search = () => {
                   console.log(BBE);
                   return (
                     <>
-                      <ProductCard key={productinf.product.ProductID+StockID+index} name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} numberOfStock={Quantity} bbe={BBE} />
+                      <ProductCard key={productinf.product.ProductID+StockID+index} navigation={navigation} name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} numberOfStock={Quantity} bbe={BBE} />
                     </>
                   )
                 })

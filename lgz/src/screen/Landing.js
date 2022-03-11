@@ -46,6 +46,11 @@ const DashboardRouter = ({ navigation }) => {
         name="checkStock"
         component={StockItems}
       />
+      <stackNav.Screen
+      options={{title:"Product Detailed"}}
+      name="productDetailed"
+      component={ProductDetail}
+      />
     </stackNav.Navigator>
   );
 };

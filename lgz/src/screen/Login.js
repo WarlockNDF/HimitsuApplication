@@ -34,10 +34,8 @@ const Login = ({ navigation }) => {
         if (res.status != 201) throw "UnAuthorize Exception";
         userStore.updateProfile(res.data);
         await AsyncStorage.setItem("@Token", res.data.accessToken);
+        resetInput();
         navigation.navigate("Landing");
-        setLoading(false);
-        setUsername("");
-        SetPassword("");
       })
       .catch((err) => {
         console.error(err);
@@ -45,6 +43,14 @@ const Login = ({ navigation }) => {
         alert("fail to authen");
       });
   };
+
+  function resetInput(){
+    setLoading(false);
+    setUsername("");
+    SetPassword("");
+    usernameInputRef.current.clear();
+    passwordInputRef.current.clear();
+  }
 
   return (
     <KeyboardAvoidingView

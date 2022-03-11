@@ -18,7 +18,7 @@ const Account = ({ navigation }) => {
       if (status !== 200) throw "No data user found";
       console.log(data.data);
       setUserData(data.data);
-      
+      console.log(UserData.userDetail);
     } catch (err) {
       alert(err.message);
       console.error(err.message);
@@ -28,6 +28,8 @@ const Account = ({ navigation }) => {
   useEffect(() => {
     getData();
   }, []);
+
+
   return (
     <View style={styles.container}>
       <View style={styles.header}></View>
@@ -36,15 +38,25 @@ const Account = ({ navigation }) => {
         source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
       />
       <View style={styles.body}>
-        <View style={{alignItems:'center' , marginTop:40}}>
+        <View style={{ alignItems: 'center', marginTop: 40 }}>
           <Text style={styles.name}>{UserData.username}</Text>
-          <Text style={styles.info}>UX Designer / Mobile developer</Text>
-          <Text style={styles.description}>
-            Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum
-            electram expetendis, omittam deseruisse consequuntur ius an,
-          </Text>
+          {
+            UserData.userDetail && (
+              <>
+                <Text style={styles.info}>{`${UserData.userDetail.firstname} ${UserData.userDetail.lastname}`}</Text>
+                <Text style={styles.description}>
+                  {`
+                Store Name : ${UserData.userDetail.storeName} \n
+                Location : ${UserData.userDetail.location}\n
+                Contact Number : ${UserData.userDetail.phoneNumber}\n
+                Contact Email : ${UserData.userDetail.email}
+                `}
+                </Text>
+              </>
+            )
+          }
           <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer} onPress={()=>navigation.navigate('LoginScreen')}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('LoginScreen')}>
               <Text>Log Out</Text>
             </TouchableOpacity>
           </View>
@@ -99,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#696969",
     marginTop: 10,
-    textAlign: "center",
+    textAlign: "left",
   },
   buttonContainer: {
     marginTop: 10,

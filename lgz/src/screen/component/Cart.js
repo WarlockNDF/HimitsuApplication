@@ -21,12 +21,11 @@ const Cart = ({ navigation, route }) => {
       </View>
       <View>
         <NumericInput onChange={value => setQuantity(value)}/>
-        {console.log(quantity)}
       </View>
       <View>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => alert("eiei")}
+          onPress={() => alert(quantity)}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>ADD TO CART</Text>
         </TouchableOpacity>

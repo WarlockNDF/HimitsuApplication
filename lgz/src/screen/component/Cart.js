@@ -10,13 +10,13 @@ import React, { useState } from "react";
 import NumericInput from "react-native-numeric-input";
 
 const Cart = ({ navigation, route }) => {
-  const { productname, supplierName } = route.params;
+  const { productid, productname, supplierName } = route.params;
   const [quantity, setQuantity] = useState(1);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ alignItems: "center", margin: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{productname}</Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>{productid}{productname}</Text>
         <Text style={{ fontSize: 16 }}>{supplierName}</Text>
       </View>
       <View>

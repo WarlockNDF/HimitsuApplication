@@ -34,6 +34,7 @@ const Order = ({navigation}) => {
                 <ProductOrderCard
                   key={ProductID + index}
                   navigation={navigation}
+                  productID={ProductID}
                   productName={ProductName}
                   typeName={productType.TypeName}
                   supplierName={supplier.SupplierName}

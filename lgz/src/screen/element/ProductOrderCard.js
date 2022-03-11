@@ -11,12 +11,13 @@ import {
   Badge,
 } from "native-base";
 
-const OrderProductCard = ({ navigation, productName, typeName, supplierName }) => {
+const OrderProductCard = ({ navigation, productID ,productName, typeName, supplierName }) => {
   return (
     <Pressable
       mt={15}
       onPress={() => {
         navigation.navigate("cartPage", {
+          productid:productID,
           productname:productName,
           supplierName:supplierName
         });

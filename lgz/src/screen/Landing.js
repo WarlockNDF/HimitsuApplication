@@ -48,11 +48,6 @@ const DashboardRouter = ({ navigation }) => {
         component={StockItems}
       />
       <stackNav.Screen
-        options={{ title: "Product Detailed" }}
-        name="productDetailed"
-        component={ProductDetail}
-      />
-      <stackNav.Screen
         options={{ title: "CART PAGE" }}
         name="cartPage"
         component={Cart}
@@ -60,6 +55,25 @@ const DashboardRouter = ({ navigation }) => {
     </stackNav.Navigator>
   );
 };
+
+const SearchRoute = ({ navigation }) => {
+  return (
+    <stackNav.Navigator
+      initialRouteName="searchScreen"
+    >
+      <stackNav.Screen
+        options={{ headerShown: false }}
+        name="searchScreen"
+        component={Search}
+      />
+      <stackNav.Screen
+        options={{ title: "Product Detailed", headerBackTitle:"Search"}}
+        name="productDetailed"
+        component={ProductDetail}
+      />
+    </stackNav.Navigator>
+  )
+}
 
 const Landing = () => {
   return (
@@ -91,7 +105,7 @@ const Landing = () => {
       })}
     >
       <bottomTabNav.Screen name="home" component={DashboardRouter} />
-      <bottomTabNav.Screen name="search" component={Search} />
+      <bottomTabNav.Screen name="search" component={SearchRoute} />
       <bottomTabNav.Screen name="status" component={Status} />
       <bottomTabNav.Screen name="account" component={Account} />
     </bottomTabNav.Navigator>

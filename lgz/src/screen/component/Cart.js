@@ -1,12 +1,17 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView } from "react-native";
+import React from "react";
 
-const Cart = () => {
+const Cart = ({ navigation, route }) => {
+  const { productname, supplierName } = route.params;
+
   return (
-    <View>
-      <Text>Cart</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <View style={{ alignItems: "center", margin: 30 }}>
+        <Text>{productname}</Text>
+        <Text>{supplierName}</Text>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-export default Cart
+export default Cart;

@@ -4,7 +4,7 @@ import { ScrollView } from "native-base";
 import http from "../../service/http";
 import ProductOrderCard from "../element/ProductOrderCard";
 
-const Order = () => {
+const Order = ({navigation}) => {
   const [products, setProducts] = useState([]);
 
   const getData = async () => {
@@ -33,7 +33,8 @@ const Order = () => {
               <>
                 <ProductOrderCard
                   key={ProductID + index}
-                  name={ProductName}
+                  navigation={navigation}
+                  productName={ProductName}
                   typeName={productType.TypeName}
                   supplierName={supplier.SupplierName}
                 />

@@ -12,6 +12,7 @@ import LowStockItems from "./component/LowStockItems";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProductDetail from "./component/ProductDetail";
+import Cart from "./component/Cart";
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -47,29 +48,18 @@ const DashboardRouter = ({ navigation }) => {
         component={StockItems}
       />
       <stackNav.Screen
-      options={{title:"Product Detailed"}}
-      name="productDetailed"
-      component={ProductDetail}
+        options={{ title: "Product Detailed" }}
+        name="productDetailed"
+        component={ProductDetail}
+      />
+      <stackNav.Screen
+        options={{ title: "CART PAGE" }}
+        name="cartPage"
+        component={Cart}
       />
     </stackNav.Navigator>
   );
 };
-
-// const SearchRouter = ({ navigation  }) => {
-//   return (
-//     <stackNav.Navigator initialRouteName="Search">
-//       <stackNav.Screen
-//         name="search"
-//         component={Search}
-//       />
-//       <stackNav.Screen
-//         name="productdetail"
-//         component={ProductDetail}
-//       />
-//     </stackNav.Navigator>
-//   );
-// };
-
 
 const Landing = () => {
   return (

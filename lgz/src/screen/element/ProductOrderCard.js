@@ -11,9 +11,17 @@ import {
   Badge,
 } from "native-base";
 
-const OrderProductCard = ({ name, typeName, supplierName}) => {
+const OrderProductCard = ({ navigation, productName, typeName, supplierName }) => {
   return (
-    <Pressable mt={15}>
+    <Pressable
+      mt={15}
+      onPress={() => {
+        navigation.navigate("cartPage", {
+          productname:productName,
+          supplierName:supplierName
+        });
+      }}
+    >
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
@@ -39,25 +47,21 @@ const OrderProductCard = ({ name, typeName, supplierName}) => {
             }}
           >
             <HStack>
-              <Text
-                color="coolGray.800"
-                mt="3"
-                fontWeight="bold"
-                fontSize="xl"
-              >
-                {`Name : ` + name}
+              <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="xl">
+                {`Name : ` + productName}
               </Text>
               <Spacer />
-              <Text
-                color="darkBlue.800"
-                mt="4"
-                mr="2"
-                fontSize="md"
-              >
+              <Text color="darkBlue.800" mt="4" mr="2" fontSize="md">
                 {`Supplier : ` + supplierName}
               </Text>
             </HStack>
-            <Text color="coolGray.800" mt="2" fontWeight="medium" fontSize="xs" mb="2">
+            <Text
+              color="coolGray.800"
+              mt="2"
+              fontWeight="medium"
+              fontSize="xs"
+              mb="2"
+            >
               {`Type : ` + typeName}
             </Text>
           </Box>

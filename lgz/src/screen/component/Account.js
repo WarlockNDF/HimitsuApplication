@@ -28,42 +28,6 @@ const Account = ({ navigation }) => {
     getData();
   }, []);
   return (
-    // <SafeAreaView >
-    //     <View style={{backgroundColor:"fff",margin: 10,borderRadius:10, alignItems:"center"}}>
-    //         <Text style={{fontSize:24, marginTop:30, fontWeight:'bold'}}>Account Manager</Text>
-    //     </View>
-
-    //     <View style={styles.container}>
-    //     <Text style={styles.text}>
-    //     {'\t Store Name : '}
-    //     {'\n'}
-    //     {`\t _storename`}
-    //     </Text>
-    //     <Text></Text>
-    //     <View style={styles.line} />
-    //     <Text></Text>
-
-    //     <Text style={styles.text}>
-    //     {'\t Name : '}
-    //     {'\n'}
-    //     {`\t name`}
-    //     </Text>
-    //     <Text></Text>
-    //     <View style={styles.line} />
-    //     <Text></Text>
-    //     <Text style={styles.text}>
-    //     {'\t Role : '}
-    //     {'\n'}
-    //     {'\t Store Manager '}
-    //     </Text>
-    //     <View style={styles.line} />
-    //     <Button style={{marginTop:30}} onPress={() => {
-    //             navigation.navigate('LoginScreen');
-    //         }} >
-    //             <Text > test log out</Text>
-    //     </Button>
-    //     </View>
-    // </SafeAreaView>
     <View style={styles.container}>
       <View style={styles.header}></View>
       <Image
@@ -72,7 +36,7 @@ const Account = ({ navigation }) => {
       />
       <View style={styles.body}>
         <View style={{alignItems:'center' , marginTop:40}}>
-          <Text style={styles.name}>John Doe</Text>
+          <Text style={styles.name}>{UserData.username}</Text>
           <Text style={styles.info}>UX Designer / Mobile developer</Text>
           <Text style={styles.description}>
             Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum

@@ -79,10 +79,13 @@ const Search = ({navigation}) => {
               {
                 products.map((productinf, index) => {
                   const { StockID, Quantity, BBE } = productinf;
-                  console.log(BBE);
+                  console.log(productinf);
                   return (
                     <>
-                      <ProductCard key={productinf.product.ProductID+StockID+index} navigation={navigation} name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} numberOfStock={Quantity} bbe={BBE} />
+                      <ProductCard key={productinf.product.ProductID+StockID+index} navigation={navigation} 
+                      name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} 
+                      productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE} 
+                      supplier={productinf.product.supplier} />
                     </>
                   )
                 })

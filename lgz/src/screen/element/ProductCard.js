@@ -14,9 +14,10 @@ import {
 
 moment.locale("th");
 
-const ProductCard = ({navigation, name, typeName, numberOfStock, bbe }) => {
+const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,supplier}) => {
   return (
-    <Pressable mt={15} onPress={() => {navigation.navigate("productDetailed")}}>
+    <Pressable mt={15} onPress={() => {navigation.navigate("productDetailed",
+      {Id:productId, Name:name, Supplier: supplier, Quantity:numberOfStock, BBE:bbe})}}>
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box

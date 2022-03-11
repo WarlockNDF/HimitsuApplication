@@ -18,6 +18,7 @@ const Account = ({ navigation }) => {
       if (status !== 200) throw "No data user found";
       console.log(data.data);
       setUserData(data.data);
+      
     } catch (err) {
       alert(err.message);
       console.error(err.message);
@@ -43,11 +44,8 @@ const Account = ({ navigation }) => {
             electram expetendis, omittam deseruisse consequuntur ius an,
           </Text>
           <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Opcion 1</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <Text>Opcion 2</Text>
+            <TouchableOpacity style={styles.buttonContainer} onPress={()=>navigation.navigate('LoginScreen')}>
+              <Text>Log Out</Text>
             </TouchableOpacity>
           </View>
         </View>

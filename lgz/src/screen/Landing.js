@@ -13,6 +13,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProductDetail from "./component/ProductDetail";
 import Cart from "./component/Cart";
+import SummaryOrder from "./component/SummaryOrder";
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -51,6 +52,11 @@ const DashboardRouter = ({ navigation }) => {
         options={{ title: "CART PAGE"}}
         name="cartPage"
         component={Cart}
+      />
+      <stackNav.Screen
+        options={{ title: "SUMMARY PAGE"}}
+        name="summary"
+        component={SummaryOrder}
       />
     </stackNav.Navigator>
   );

@@ -22,9 +22,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Cart = ({ navigation, route }) => {
   const { productid, productname, supplierName } = route.params;
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(1);
   const { cart, cartAction } = useCartContext();
-  const [modalVisible, setModalVisible] = useState(false);
 
   const IconHeaderButton = (props) => (
     <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
@@ -37,9 +36,7 @@ const Cart = ({ navigation, route }) => {
           <Item
             title="CART"
             iconName="cart-sharp"
-            onPress={() => 
-              setModalVisible(true)
-          }
+            onPress={() => {navigation.navigate("summary")}}
           />
         </HeaderButtons>
       ),
@@ -60,48 +57,12 @@ const Cart = ({ navigation, route }) => {
       <View>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() =>
-            cartAction.addToCart({ productID: productid, Quantity: quantity })
-          }
+          onPress={() => {
+            cartAction.addToCart({ productID: productid, Quantity: quantity });
+          }}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>ADD TO CART</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>{JSON.stringify({ cart })}</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setModalVisible(!modalVisible)
-                  alert("สั่งสินค้าแล้ว")
-                }}
-              >
-                <Text style={styles.textStyle}>Submit Order</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => {
-                  setModalVisible(!modalVisible)
-                  alert("ยกเลิก")
-                  cartAction.clearCart();
-                }}
-              >
-                <Text style={styles.textStyle}>Cancel Order</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
       </View>
     </SafeAreaView>
   );

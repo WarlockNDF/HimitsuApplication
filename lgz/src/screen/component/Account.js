@@ -60,7 +60,6 @@ const Account = ({ navigation }) => {
           }
           <View style={styles.bodyContent}>
             <TouchableOpacity style={styles.buttonContainer} onPress={ () => {
-              cartAction.clearCart();
               navigation.navigate('LoginScreen');
               }}>
               <Text>Log Out</Text>

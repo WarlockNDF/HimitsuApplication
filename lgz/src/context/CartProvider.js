@@ -8,7 +8,7 @@ export function useCartContext() {
 }
 
 const initialCart = {
-  items: [],
+  datas: [],
 };
 
 function CartProvider({children}) {
@@ -17,7 +17,7 @@ function CartProvider({children}) {
   function addToCart(product) {
     setCart(prevCart => ({
       ...prevCart,
-      items: [...prevCart.items, product],
+      datas: [...prevCart.datas, product],
     }));
   }
 

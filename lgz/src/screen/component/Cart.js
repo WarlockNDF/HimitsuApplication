@@ -36,7 +36,9 @@ const Cart = ({ navigation, route }) => {
           <Item
             title="CART"
             iconName="cart-sharp"
-            onPress={() => {navigation.navigate("summary")}}
+            onPress={() => {
+              navigation.navigate("summary");
+            }}
           />
         </HeaderButtons>
       ),
@@ -62,6 +64,17 @@ const Cart = ({ navigation, route }) => {
           }}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>ADD TO CART</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            cartAction.clearCart();
+          }}
+        >
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>CLEAR CART</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

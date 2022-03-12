@@ -11,22 +11,6 @@ const SummaryOrder = ({ navigation }) => {
 
   const [products, setProducts] = useState([]);
 
-  const getProduct = async () => {
-    try {
-      const { status, data } = await http.get("product");
-      if (status !== 200) throw "No Such Product";
-      console.log(data.data);
-      setProducts(data.data);
-    } catch (err) {
-      alert(err.message);
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getProduct();
-  }, []);
-
 
   const loopData = () => {
     for (let i = 0; i < cart.datas.length; i++) {
@@ -34,8 +18,6 @@ const SummaryOrder = ({ navigation }) => {
       Qty.push(cart.datas[i].Quantity);
     }
   };
-
-
 
   return (
     <SafeAreaView>

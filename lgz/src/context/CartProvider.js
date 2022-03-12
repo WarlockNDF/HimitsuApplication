@@ -1,4 +1,5 @@
 import React, {createContext, useContext, useState} from 'react';
+import {node} from 'prop-types';
 
 const CartContext = createContext({});
 
@@ -20,10 +21,15 @@ function CartProvider({children}) {
     }));
   }
 
+  function clearCart(){
+    setCart(initialCart);
+  }
+
   const cartStore = {
     cart,
     cartAction: {
       addToCart,
+      clearCart,
     },
   };
 
@@ -31,4 +37,9 @@ function CartProvider({children}) {
     <CartContext.Provider value={cartStore}>{children}</CartContext.Provider>
   );
 }
+
+CartProvider.propTypes ={
+  children: node.isRequired,
+}
+
 export default CartProvider;

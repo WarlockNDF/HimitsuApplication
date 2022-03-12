@@ -6,6 +6,7 @@ import UserProvider from "./src/context/UserProvider";
 import { NativeBaseProvider, Box, Center } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import CartProvider from "./src/context/CartProvider";
 
 let Stack = createStackNavigator();
 
@@ -13,20 +14,22 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <UserProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="LoginScreen">
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="LoginScreen"
-              component={Login}
-            />
-            <Stack.Screen
-              options={{ headerShown: false, gestureEnabled: false }}
-              name="Landing"
-              component={Landing}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <CartProvider>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="LoginScreen">
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="LoginScreen"
+                component={Login}
+              />
+              <Stack.Screen
+                options={{ headerShown: false, gestureEnabled: false }}
+                name="Landing"
+                component={Landing}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </CartProvider>
       </UserProvider>
     </NativeBaseProvider>
   );

@@ -48,7 +48,7 @@ const DashboardRouter = ({ navigation }) => {
         component={StockItems}
       />
       <stackNav.Screen
-        options={{ title: "CART PAGE" }}
+        options={{ title: "CART PAGE"}}
         name="cartPage"
         component={Cart}
       />

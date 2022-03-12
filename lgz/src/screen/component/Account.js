@@ -9,9 +9,12 @@ import React, { useEffect, useState } from "react";
 import { Text, Button, Center } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import http from "../../service/http";
+import { useCartContext } from "../../context/CartProvider";
 
 const Account = ({ navigation }) => {
   const [UserData, setUserData] = useState([]);
+  const { cart, cartAction } = useCartContext();
+
   const getData = async () => {
     try {
       const { status, data } = await http.get("user");
@@ -56,7 +59,10 @@ const Account = ({ navigation }) => {
             )
           }
           <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('LoginScreen')}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={ () => {
+              cartAction.clearCart();
+              navigation.navigate('LoginScreen');
+              }}>
               <Text>Log Out</Text>
             </TouchableOpacity>
           </View>

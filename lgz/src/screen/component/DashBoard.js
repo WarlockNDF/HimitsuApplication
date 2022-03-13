@@ -68,16 +68,10 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="red.800"
-                        mt="3"
-                        fontWeight="bold"
-                        fontSize="lg"
-                        mb="3"
-                      >
-                        Nearly Expire
-                      </Text>
-                      <AntDesign name="clockcircle" size={35} color="red" />
+                      <Image
+                        source={require("../../../assets/logo/clock-expire.png")}
+                        style={{ width: 80, height: 80 }}
+                      />
                     </Center>
                   </VStack>
                 </Box>
@@ -113,19 +107,9 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="coolGray.800"
-                        mt="3"
-                        fontWeight="bold"
-                        fontSize="lg"
-                        mb="3"
-                      >
-                        Order
-                      </Text>
-                      <MaterialCommunityIcons
-                        name="cart-arrow-down"
-                        size={35}
-                        color="black"
+                      <Image
+                        source={require("../../../assets/logo/wheelbarrow.png")}
+                        style={{ width: 80, height: 80 }}
                       />
                     </Center>
                   </VStack>
@@ -164,19 +148,9 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="yellow.800"
-                        mt="3"
-                        fontWeight="bold"
-                        fontSize="lg"
-                        mb="3"
-                      >
-                        Low Stock
-                      </Text>
-                      <MaterialCommunityIcons
-                        name="package-down"
-                        size={35}
-                        color="#FFDA02"
+                      <Image
+                        source={require("../../../assets/logo/out-of-stock.png")}
+                        style={{ width: 80, height: 80 }}
                       />
                     </Center>
                   </VStack>
@@ -213,19 +187,9 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="coolGray.800"
-                        mt="3"
-                        fontWeight="bold"
-                        fontSize="lg"
-                        mb="3"
-                      >
-                        Stock
-                      </Text>
-                      <Ionicons
-                        name="file-tray-stacked-sharp"
-                        size={35}
-                        color="black"
+                      <Image
+                        source={require("../../../assets/logo/packages.png")}
+                        style={{ width: 80, height: 80 }}
                       />
                     </Center>
                   </VStack>

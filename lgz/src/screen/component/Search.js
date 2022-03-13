@@ -68,7 +68,7 @@ const Search = ({ navigation }) => {
             />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <ScrollView>
+            <ScrollView height={"xl"}>
               {
                 products.map((productinf, index) => {
                   const { StockID, Quantity, BBE } = productinf;

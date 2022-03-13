@@ -9,6 +9,7 @@ import {
   Pressable,
   Right,
   Left,
+  Image
 } from "react-native";
 import React, { useState, useEffect, Component } from "react";
 import NumericInput from "react-native-numeric-input";
@@ -47,6 +48,12 @@ const Cart = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View>
+        <Image
+        source={require('../../../assets/Image.png')}
+        style={{ width: 250, height: 200,marginTop : 10 }}
+        />
+      </View>
       <View style={{ alignItems: "center", margin: 10 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
           {productid}:{productname}

@@ -22,8 +22,10 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Cart = ({ navigation, route }) => {
   const { productid, productname, supplierName } = route.params;
-  const [quantity, setQuantity] = useState(1);
   const { cart, cartAction } = useCartContext();
+  const [quantity, setQuantity] = useState(() => {
+    return cartAction.getCurrentCount(productid)
+ });
 
   const IconHeaderButton = (props) => (
     <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
@@ -54,7 +56,7 @@ const Cart = ({ navigation, route }) => {
         <Text style={{ fontSize: 16 }}>{supplierName}</Text>
       </View>
       <View>
-        <NumericInput onChange={(value) => setQuantity(value)} />
+        <NumericInput value={quantity} onChange={(value) => setQuantity(value)} />
       </View>
       <View>
         <TouchableOpacity
@@ -68,14 +70,14 @@ const Cart = ({ navigation, route }) => {
       </View>
 
       <View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {
             cartAction.clearCart();
           }}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>CLEAR CART</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );

@@ -7,24 +7,20 @@ import { userContext } from "../../context/UserProvider";
 const SummaryOrder = ({ navigation }) => {
   const userStore = React.useContext(userContext);
   const { cart, cartAction } = useCartContext([]);
-  const [ products, setProducts ] = useState([]);
+  const [products, setProducts] = useState([]);
   const productID = [];
-  const productQty = [];
-  const UserID = userStore.profile.Id
 
   const loopData = () => {
-    for (let i = 0; i < cart.datas.length; i++) {
-      productID.push(cart.datas[i].productID);
-      productQty.push(cart.datas[i].Quantity);
-    }
+    cart.datas.forEach((context) => {
+      productID.push(context.productID)
+    })
   };
-  
+
   //GET ARRAY LIST PRODUCT by ID
   const getProduct = async () => {
     try {
-      console.log({ids: productID})
-      const { status, data } = await http.get('product/ids', {ids: productID}, {header: {
-        "Content-Type": "application/json"}})
+      let body = { ids: productID }
+      const { status, data } = await http.post('product/ids', body)
       if (status !== 200) throw "No Such Product"
       console.log(data.data);
       setProducts(data.data);
@@ -34,7 +30,13 @@ const SummaryOrder = ({ navigation }) => {
     }
   }
 
-  useEffect(() => {
+  const getQty = (id) => {
+    let idx = cart.datas.findIndex((cartProduct)=> cartProduct.productID === id)
+    if(idx === -1) return 
+    return cart.datas[idx].Quantity
+  }
+
+  useEffect(async () => {
     loopData();
     getProduct();
   }, [])
@@ -50,19 +52,22 @@ const SummaryOrder = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center"}}>
-      <View>
-        {alert(productQty + ":" + productID)}
-      </View>
-
+    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
       <View style={{ margin: 10 }}>
         <Text style={{ fontSize: 24, fontWeight: "bold" }}>
           LIST PRODUCTS IN CART
         </Text>
       </View>
-
       <View>
-        <Text>{UserID}</Text>
+        {
+          products.map((product) => {
+            return (
+              <>
+                <Text>{product.ProductName+" "+`${getQty(product.ProductID)}`}</Text>
+              </>
+            )
+          })
+        }
       </View>
 
     </SafeAreaView>

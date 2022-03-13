@@ -53,9 +53,15 @@ const SummaryOrder = ({ navigation }) => {
   const test = [1001,20]
 
   const createOrder = async () => {
-    await http.post("order", cart.datas).then(async (res)=> {
+    let createData = []
+    cart.datas.forEach((data) => {
+      createData.push({
+        productId : data.productID,
+        quantity: data.Quantity
+      })
+    })
+    await http.post("order", createData).then(async (res)=> {
       consolse.log(res.data)
-      console.log({productId: 1001, quantity: 10})
     }).catch((err) => {
       console.error(err);
       alert("Can't Create Order!!")
@@ -86,9 +92,7 @@ const SummaryOrder = ({ navigation }) => {
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {
-           //alert(JSON.stringify(dataPost))
-           alert(JSON.stringify(cart.datas))
-           //createOrder()
+           createOrder()
           }}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>SUBMIT ORDER</Text>

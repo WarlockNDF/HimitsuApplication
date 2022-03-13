@@ -2,9 +2,7 @@ import { StyleSheet, SafeAreaView, View } from 'react-native'
 import React, { useEffect, useState  } from 'react'
 import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select, ScrollView } from "native-base";
 import http from "../../service/http";
-import StockCard from '../element/StockCard';
-
-
+import NearlyCard from '../element/NearlyCard';
 
 const NearlyExpire = () => {
 
@@ -12,7 +10,7 @@ const NearlyExpire = () => {
 
   const getData = async () => {
     try {
-      const { status, data } = await http.get('stock')
+      const { status, data } = await http.get('stock/nearlyexpire')
       if (status !== 200) throw "No Such Product"
       console.log(data.data);
       setNearlyEx(data.data);
@@ -33,10 +31,10 @@ const NearlyExpire = () => {
             <ScrollView>
               {
                 nearlyEx.map((nearlyExprie, index) => {
-                  const { StockID, product, Quantity} = nearlyExprie;
+                  const { StockID, product, BBE} = nearlyExprie;
                   return (
                   <>
-                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity}/>
+                    <NearlyCard key={StockID+index} name={product.ProductName} stockID={StockID} bbe={BBE}/>
                   </>
 
                   )

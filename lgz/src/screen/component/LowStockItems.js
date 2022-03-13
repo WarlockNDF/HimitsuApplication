@@ -33,7 +33,7 @@ const LowStockItems = ()=> {
                   const { StockID, product, Quantity} = lowstock;
                   return (
                   <>
-                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity}/>
+                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity} stockID={StockID}/>
                   </>
                   )
                 })

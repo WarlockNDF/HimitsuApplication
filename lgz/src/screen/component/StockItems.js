@@ -33,7 +33,7 @@ const StockItems = () => {
                   const { StockID, product, Quantity} = stock;
                   return (
                   <>
-                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity}/>
+                    <StockCard key={StockID+index} name={product.ProductName} typeName={product.productType.TypeName} numberOfStock={Quantity} stockID={StockID}/>
                   </>
 
                   )

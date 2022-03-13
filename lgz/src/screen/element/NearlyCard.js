@@ -11,7 +11,11 @@ import {
   Badge,
 } from "native-base";
 
-const StockCard = ({ name, typeName, numberOfStock, stockID }) => {
+import moment from 'moment';
+
+moment.localeData("th");
+
+const NearlyCard = ({ name, stockID ,bbe }) => {
   return (
     <Pressable mt={15}>
       {({ isHovered, isFocused, isPressed }) => {
@@ -55,15 +59,15 @@ const StockCard = ({ name, typeName, numberOfStock, stockID }) => {
                 fontSize="md"
                 fontWeight='bold'
               >
-                {`Quantity : ` + numberOfStock}
+                {'Stock : '+stockID}
               </Text>
             </HStack>
             <Text color="coolGray.800" fontWeight="medium" fontSize="md" mb="2">
-              {'Stock : '+stockID}
+              {'BBE : '+ moment(bbe).format('l')}
             </Text>
             <Flex>
               <Badge
-                colorScheme={numberOfStock === 0 ? "danger" : "green"}
+                colorScheme="danger" 
                 _text={{
                   color: "white",
                   fontWeight:"bold"
@@ -71,7 +75,7 @@ const StockCard = ({ name, typeName, numberOfStock, stockID }) => {
                 variant="solid"
                 rounded="2"
               >
-                {numberOfStock === 0 ? "OUT OF STOCK" : "AVAILABLE"}
+             {'CHECK PRODUCT'}
               </Badge>
             </Flex>
           </Box>
@@ -81,4 +85,4 @@ const StockCard = ({ name, typeName, numberOfStock, stockID }) => {
   );
 };
 
-export default StockCard;
+export default NearlyCard;

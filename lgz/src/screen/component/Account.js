@@ -5,32 +5,16 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text, Button, Center } from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
-import http from "../../service/http";
 import { useCartContext } from "../../context/CartProvider";
+import { userContext } from "../../context/UserProvider";
 
 const Account = ({ navigation }) => {
-  const [UserData, setUserData] = useState([]);
+
   const { cart, cartAction } = useCartContext();
-
-  const getData = async () => {
-    try {
-      const { status, data } = await http.get("user");
-      if (status !== 200) throw "No data user found";
-      console.log(data.data);
-      setUserData(data.data);
-      console.log(UserData.userDetail);
-    } catch (err) {
-      alert(err.message);
-      console.error(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const userStore = React.useContext(userContext);
 
 
   return (
@@ -42,17 +26,17 @@ const Account = ({ navigation }) => {
       />
       <View style={styles.body}>
         <View style={{ alignItems: 'center', marginTop: 40 }}>
-          <Text style={styles.name}>{UserData.username}</Text>
+          <Text style={styles.name}>{userStore.profile.username}</Text>
           {
-            UserData.userDetail && (
+            userStore.profile.userDetail && (
               <>
-                <Text style={styles.info}>{`${UserData.userDetail.firstname} ${UserData.userDetail.lastname}`}</Text>
+                <Text style={styles.info}>{`${userStore.profile.userDetail.firstname} ${userStore.profile.userDetail.lastname}`}</Text>
                 <Text style={styles.description}>
                   {`
-                Store Name : ${UserData.userDetail.storeName} \n
-                Location : ${UserData.userDetail.location}\n
-                Contact Number : ${UserData.userDetail.phoneNumber}\n
-                Contact Email : ${UserData.userDetail.email}
+                Store Name : ${userStore.profile.userDetail.storeName} \n
+                Location : ${userStore.profile.userDetail.location}\n
+                Contact Number : ${userStore.profile.userDetail.phoneNumber}\n
+                Contact Email : ${userStore.profile.userDetail.email}
                 `}
                 </Text>
               </>

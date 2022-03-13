@@ -19,7 +19,7 @@ import React, { useEffect, useState } from "react";
 import { AntDesign, CheckIcon } from "@expo/vector-icons";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 
-const Search = ({navigation}) => {
+const Search = ({ navigation }) => {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -66,13 +66,6 @@ const Search = ({navigation}) => {
                 />
               }
             />
-            {/* <Select minWidth="200" accessibilityLabel="Choose Filter" placeholder="Choose Filter" _selectedItem={{
-              bg: "teal.600",
-              endIcon: <CheckIcon size="5" />
-            }} mt={1}>
-              <Select.Item key={"product"} label="Product" value="product" />
-              <Select.Item key={"stock"} label="stock" value="stock" />
-            </Select> */}
           </View>
           <View style={{ alignItems: 'center' }}>
             <ScrollView>
@@ -82,10 +75,12 @@ const Search = ({navigation}) => {
                   console.log(productinf);
                   return (
                     <>
-                      <ProductCard key={productinf.product.ProductID+StockID+index} navigation={navigation} 
-                      name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName} 
-                      productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE} 
-                      supplier={productinf.product.supplier} />
+                      <View key={productinf.product.ProductID + StockID + index}>
+                        <ProductCard navigation={navigation}
+                          name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
+                          productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
+                          supplier={productinf.product.supplier} />
+                      </View>
                     </>
                   )
                 })

@@ -1,1 +1,1 @@
-export const END_POINT = "https://lgz.herokuapp.com/";;
+export const END_POINT = "https://lgz.herokuapp.com/";

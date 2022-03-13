@@ -32,7 +32,7 @@ const Login = ({ navigation }) => {
       .then(async (res) => {
         console.log(res.data.accessToken);
         if (res.status != 201) throw "UnAuthorize Exception";
-        userStore.updateProfile(res.data);
+        await userStore.updateProfile();
         await AsyncStorage.setItem("@Token", res.data.accessToken);
         resetInput();
         navigation.navigate("Landing");

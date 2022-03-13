@@ -18,7 +18,8 @@ const Account = ({ navigation }) => {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{backgroundColor:'#FAFAFA'}}>
+      <View style={styles.container}>
       <View style={styles.header}></View>
       <Image
         style={styles.avatar}
@@ -52,13 +53,17 @@ const Account = ({ navigation }) => {
         </View>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
 export default Account;
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
+    backgroundColor:"#FFFFFF"
+  }
+  ,header: {
     backgroundColor: "#6495ED",
     height: 200,
   },
@@ -80,6 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
+    backgroundColor:"#FFFFFF"
   },
   name: {
     marginTop: 10,

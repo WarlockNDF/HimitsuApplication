@@ -14,7 +14,7 @@ import {
   Flex,
   Badge,
 } from "native-base";
-import React from "react";
+import React, { Component } from "react";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -22,14 +22,21 @@ import {
 } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CalendarPicker from "react-native-calendar-picker";
+import moment from "moment";
 
 const DashBoard = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF"}}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
-        <Text style={{ fontSize: 32, padding: 60, fontWeight: "bold" }}>
+        <Text style={{ fontSize: 26, padding: 12, fontWeight: "bold" , shadow:"3" , color:"#e11d48"}}>
           DASHBOARD
         </Text>
+        <View style={{ alignItems: "center" }}>
+          <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
+            <CalendarPicker width={330} />
+          </Box>
+        </View>
       </View>
       <View
         style={{
@@ -53,7 +60,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -101,7 +108,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -151,7 +158,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -199,7 +206,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -214,12 +221,7 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="#000"
-                        fontWeight="bold"
-                        fontSize="md"
-                        mb="2"
-                      >
+                      <Text color="#000" fontWeight="bold" fontSize="md" mb="2">
                         STOCKS
                       </Text>
                       <Image

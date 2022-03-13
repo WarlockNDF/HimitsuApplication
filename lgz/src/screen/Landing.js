@@ -11,9 +11,9 @@ import { StyleSheet, Text, View } from "react-native";
 import LowStockItems from "./component/LowStockItems";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ProductDetail from "./component/ProductDetail";
 import Cart from "./component/Cart";
 import SummaryOrder from "./component/SummaryOrder";
+
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -62,24 +62,7 @@ const DashboardRouter = ({ navigation }) => {
   );
 };
 
-const SearchRoute = ({ navigation }) => {
-  return (
-    <stackNav.Navigator
-      initialRouteName="searchScreen"
-    >
-      <stackNav.Screen
-        options={{ headerShown: false }}
-        name="searchScreen"
-        component={Search}
-      />
-      <stackNav.Screen
-        options={{ title: "Product Detailed", headerBackTitle:"Search"}}
-        name="productDetailed"
-        component={ProductDetail}
-      />
-    </stackNav.Navigator>
-  )
-}
+
 
 const Landing = () => {
   return (
@@ -111,7 +94,7 @@ const Landing = () => {
       })}
     >
       <bottomTabNav.Screen name="home" component={DashboardRouter} />
-      <bottomTabNav.Screen name="search" component={SearchRoute} />
+      <bottomTabNav.Screen name="search" component={Search} />
       <bottomTabNav.Screen name="status" component={Status} />
       <bottomTabNav.Screen name="account" component={Account} />
     </bottomTabNav.Navigator>

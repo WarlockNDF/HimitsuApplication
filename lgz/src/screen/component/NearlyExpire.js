@@ -27,7 +27,7 @@ const NearlyExpire = () => {
 
   return (
     <SafeAreaView>
-    <View style={{ alignItems: 'center' }}>
+    <View style={{ alignItems: 'center'}}>
             <ScrollView>
               {
                 nearlyEx.map((nearlyExprie, index) => {

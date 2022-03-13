@@ -29,7 +29,7 @@ const DashBoard = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF"}}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
-        <Text style={{ fontSize: 26, padding: 12, fontWeight: "bold" , shadow:"3" , color:"#e11d48"}}>
+        <Text style={{ fontSize: 26, padding: 12, fontWeight: "bold" , color:"#e11d48"}}>
           DASHBOARD
         </Text>
         <View style={{ alignItems: "center" }}>

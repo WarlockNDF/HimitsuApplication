@@ -14,7 +14,7 @@ import {
   Flex,
   Badge,
 } from "native-base";
-import React, { Component } from "react";
+import React from "react";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -27,9 +27,9 @@ import moment from "moment";
 
 const DashBoard = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF"}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
-        <Text style={{ fontSize: 26, padding: 12, fontWeight: "bold" , color:"#e11d48"}}>
+        <Text style={{ fontSize: 32, padding: 60, fontWeight: "bold" }}>
           DASHBOARD
         </Text>
         <View style={{ alignItems: "center" }}>
@@ -46,6 +46,7 @@ const DashBoard = ({ navigation }) => {
           alignItems: "center",
         }}
       >
+        
         <View style={{ flexDirection: "row" }}>
           <Pressable onPress={() => navigation.navigate("checkExpire")}>
             {({ isHovered, isFocused, isPressed }) => {
@@ -60,7 +61,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "white"
+                      : "coolGray.100"
                   }
                   p="5"
                   m="2"
@@ -108,7 +109,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "white"
+                      : "coolGray.100"
                   }
                   p="5"
                   m="2"
@@ -158,7 +159,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "white"
+                      : "coolGray.100"
                   }
                   p="5"
                   m="2"
@@ -206,7 +207,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "white"
+                      : "coolGray.100"
                   }
                   p="5"
                   m="2"
@@ -221,7 +222,12 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text color="#000" fontWeight="bold" fontSize="md" mb="2">
+                      <Text
+                        color="#000"
+                        fontWeight="bold"
+                        fontSize="md"
+                        mb="2"
+                      >
                         STOCKS
                       </Text>
                       <Image

@@ -25,6 +25,23 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 
+function datepick(dateVar){
+  let customDatesStyles = [];
+  console.log(dateVar)
+  dateVar.forEach(customdateFunction);
+  function customdateFunction(item){
+    customDatesStyles.push({
+      date: moment(item).format("L"),
+      // Random colors
+      style: {backgroundColor: '#FFC94B'},
+      textStyle: {color: 'black'}, // sets the font color
+      containerStyle: [], // extra styling for day container
+      allowDisabled: true, // allow custom style to apply to disabled dates
+    });
+  }
+  return(customDatesStyles);
+}
+
 const DashBoard = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
@@ -34,7 +51,7 @@ const DashBoard = ({ navigation }) => {
         </Text>
         <View style={{ alignItems: "center" }}>
           <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
-            <CalendarPicker width={330} />
+            <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"])} />
           </Box>
         </View>
       </View>

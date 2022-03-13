@@ -44,18 +44,6 @@ const Search = ({ navigation }) => {
     };
   }, []);
 
-  const renderDeatailCard = ({ item,index }) => {
-
-    return (
-      <View key={index}>
-        <ProductCard navigation={navigation}
-          name={item.product.ProductName} typeName={item.product.productType.TypeName}
-          productId={item.product.ProductID} numberOfStock={item.Quantity} bbe={item.BBE}
-          supplier={item.product.supplier} />
-      </View>
-    )
-  }
-
   return (
     <SafeAreaView>
       <VStack>
@@ -81,19 +69,14 @@ const Search = ({ navigation }) => {
             />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <FlatList
-              data={products}
-              renderItem={renderDeatailCard}
-              keyExtractor={(item) => { console.log(item); item.product.ProductID }}
-            />
-            {/* <ScrollView>
+            <ScrollView height={"xl"}>
               {
                 products.map((productinf, index) => {
                   const { StockID, Quantity, BBE } = productinf;
                   console.log(productinf);
                   return (
                     <>
-                      <ProductCard key={productinf.product.ProductID + StockID + index} navigation={navigation}
+                      <ProductCard key={productinf.product.ProductID.toString()} navigation={navigation}
                         name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
                         productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
                         supplier={productinf.product.supplier} />
@@ -101,7 +84,7 @@ const Search = ({ navigation }) => {
                   )
                 })
               }
-            </ScrollView> */}
+            </ScrollView>
           </View>
         </VStack>
       </VStack>

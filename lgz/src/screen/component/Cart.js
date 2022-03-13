@@ -25,8 +25,8 @@ const Cart = ({ navigation, route }) => {
   const { productid, productname, supplierName } = route.params;
   const { cart, cartAction } = useCartContext();
   const [quantity, setQuantity] = useState(() => {
-    return cartAction.getCurrentCount(productid)
- });
+    return cartAction.getCurrentCount(productid);
+  });
 
   const IconHeaderButton = (props) => (
     <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
@@ -63,7 +63,11 @@ const Cart = ({ navigation, route }) => {
         <Text style={{ fontSize: 16 }}>{supplierName}</Text>
       </View>
       <View>
-        <NumericInput value={quantity} onChange={(value) => setQuantity(value)} />
+        <NumericInput
+          minValue={0}
+          value={quantity}
+          onChange={(value) => setQuantity(value)}
+        />
       </View>
       <View>
         <TouchableOpacity

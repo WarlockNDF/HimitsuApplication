@@ -12,6 +12,7 @@ import {
   Heading,
   Select,
   ScrollView,
+  FlatList,
 } from "native-base";
 import http from "../../service/http";
 import ProductCard from "../element/ProductCard";
@@ -43,6 +44,18 @@ const Search = ({ navigation }) => {
     };
   }, []);
 
+  const renderDeatailCard = ({ item,index }) => {
+
+    return (
+      <View key={index}>
+        <ProductCard navigation={navigation}
+          name={item.product.ProductName} typeName={item.product.productType.TypeName}
+          productId={item.product.ProductID} numberOfStock={item.Quantity} bbe={item.BBE}
+          supplier={item.product.supplier} />
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView>
       <VStack>
@@ -68,24 +81,27 @@ const Search = ({ navigation }) => {
             />
           </View>
           <View style={{ alignItems: 'center' }}>
-            <ScrollView height={"xl"}>
+            <FlatList
+              data={products}
+              renderItem={renderDeatailCard}
+              keyExtractor={(item) => { console.log(item); item.product.ProductID }}
+            />
+            {/* <ScrollView>
               {
                 products.map((productinf, index) => {
                   const { StockID, Quantity, BBE } = productinf;
                   console.log(productinf);
                   return (
                     <>
-                      <View key={productinf.product.ProductID + StockID + index}>
-                        <ProductCard navigation={navigation}
-                          name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
-                          productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
-                          supplier={productinf.product.supplier} />
-                      </View>
+                      <ProductCard key={productinf.product.ProductID + StockID + index} navigation={navigation}
+                        name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
+                        productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
+                        supplier={productinf.product.supplier} />
                     </>
                   )
                 })
               }
-            </ScrollView>
+            </ScrollView> */}
           </View>
         </VStack>
       </VStack>

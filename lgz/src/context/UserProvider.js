@@ -5,7 +5,9 @@ export const userContext = React.createContext();
 
 const UserProvider = ({children}) => {
 
-    const [profile, setProfile] = React.useState();
+    const [profile, setProfile] = React.useState({
+        userDetail: {}
+    });
 
     const getUser = async () => {
         try {

@@ -9,12 +9,12 @@ const Status = () => {
 
   const getOrder = async () => {
     try {
-      const { status, data } = await http.get("order/detail");
+      const { status, data } = await http.get("order");
       if (status !== 200) throw "No Order";
       console.log(data.data);
       setOrders(data.data);
     } catch (err) {
-      alert(err.message);
+      alert(err.data.message);
       console.error(err.message);
     }
   };

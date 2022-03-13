@@ -45,7 +45,6 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
-                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -72,14 +71,15 @@ const DashBoard = ({ navigation }) => {
                       <Text
                         color="#FA2020"
                         fontWeight="bold"
-                        fontSize="lg"
+                        fontSize="md"
                         mb="2"
                       >
-                        Nearly Expire
+                        NEARLY EXPIRE
                       </Text>
                       <Image
                         source={require("../../../assets/logo/clock-expire.png")}
-                        style={{ width: 80, height: 80 }}
+                        style={{ width: 50, height: 50 }}
+                        alt="nearly-expire"
                       />
                     </Center>
                   </VStack>
@@ -93,7 +93,6 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
-                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -117,17 +116,18 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                    <Text
+                      <Text
                         color="coolGray.800"
                         fontWeight="bold"
-                        fontSize="lg"
+                        fontSize="md"
                         mb="2"
                       >
-                        Order
+                        ORDERS
                       </Text>
                       <Image
                         source={require("../../../assets/logo/wheelbarrow.png")}
-                        style={{ width: 80, height: 80 }}
+                        style={{ width: 50, height: 50 }}
+                        alt="order"
                       />
                     </Center>
                   </VStack>
@@ -143,7 +143,6 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
-                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -167,17 +166,18 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                    <Text
+                      <Text
                         color="#FFAD2D"
                         fontWeight="bold"
-                        fontSize="lg"
+                        fontSize="md"
                         mb="2"
                       >
-                        Low Stock
+                        LOW STOCKS
                       </Text>
                       <Image
                         source={require("../../../assets/logo/out-of-stock.png")}
-                        style={{ width: 80, height: 80 }}
+                        style={{ width: 50, height: 50 }}
+                        alt="low-stock"
                       />
                     </Center>
                   </VStack>
@@ -191,7 +191,6 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
-                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -215,17 +214,18 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                    <Text
-                        color="coolGray.800"
+                      <Text
+                        color="#000"
                         fontWeight="bold"
-                        fontSize="lg"
+                        fontSize="md"
                         mb="2"
                       >
-                        Stock
+                        STOCKS
                       </Text>
                       <Image
                         source={require("../../../assets/logo/packages.png")}
-                        style={{ width: 80, height: 80 }}
+                        style={{ width: 50, height: 50 }}
+                        alt="stock"
                       />
                     </Center>
                   </VStack>

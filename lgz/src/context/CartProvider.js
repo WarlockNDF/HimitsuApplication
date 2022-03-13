@@ -15,10 +15,22 @@ function CartProvider({children}) {
   const [cart, setCart] = useState(initialCart);
 
   function addToCart(product) {
-    setCart(prevCart => ({
-      ...prevCart,
-      datas: [...prevCart.datas, product],
-    }));
+    const prodIdx =  cart.datas.findIndex((cartProduct)=> cartProduct.productID === product.productID)
+    if (prodIdx === -1) {
+      cart.datas.push(product)
+    }else {
+      cart.datas[prodIdx] = {...cart.datas[prodIdx], Quantity: product.Quantity}
+      if(cart.datas[prodIdx].Quantity <= 0) cart.datas.splice(prodIdx,1)
+    }
+    setCart(cart);
+  }
+
+  function getCurrentCount(prodId) {
+    const prodIdx =  cart.datas.findIndex((cartProduct)=> cartProduct.productID === prodId)
+    if(prodIdx === -1) {
+      return 0
+    }
+    return cart.datas[prodIdx].Quantity
   }
 
   function clearCart(){
@@ -26,9 +38,10 @@ function CartProvider({children}) {
   }
 
   const cartStore = {
-    cart,
+    cart, 
     cartAction: {
       addToCart,
+      getCurrentCount,
       clearCart,
     },
   };

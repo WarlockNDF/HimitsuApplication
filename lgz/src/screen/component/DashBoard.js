@@ -14,7 +14,7 @@ import {
   Flex,
   Badge,
 } from "native-base";
-import React from "react";
+import React, { useEffect,useState } from "react";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -24,6 +24,7 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
+import http from "../../service/http";
 
 function datepick(dateVar){
   let customDatesStyles = [];
@@ -42,7 +43,28 @@ function datepick(dateVar){
   return(customDatesStyles);
 }
 
+/* ["20220307","20220309"] */
 const DashBoard = ({ navigation }) => {
+  const [products, setProducts] = useState([]);
+  const bbeData = async()=>{
+    try {
+      const { status, data } = await http.get('stock/nearlyexpire')
+      if (status !== 200) throw "Can't Get Product"
+      setProducts([...data.data])
+      console.log(`set Product Logs: ${products}`);
+    } catch (err) {
+      console.log(err.messsage);
+      alert("ไม่สามารถดึงข้อมูลได้");
+    }
+  }
+  let bbeArr = [];
+  useEffect(async () => {
+    await bbeData();
+    /* products.forEach(bbedataloop)
+    function bbedataloop(item){
+      bbeArr.push(moment(item.BBE).format("L"));
+    } */
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
@@ -51,7 +73,11 @@ const DashBoard = ({ navigation }) => {
         </Text>
         <View style={{ alignItems: "center" }}>
           <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
-            <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"])} />
+            {
+              products.BBE && (
+                <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"] )} />
+              )
+            }
           </Box>
         </View>
       </View>

@@ -27,7 +27,7 @@ import moment from "moment";
 
 const DashBoard = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
         <Text style={{ fontSize: 32, padding: 60, fontWeight: "bold" }}>
           DASHBOARD

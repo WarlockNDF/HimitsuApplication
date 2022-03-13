@@ -12,26 +12,25 @@ import { useCartContext } from "../../context/CartProvider";
 import { userContext } from "../../context/UserProvider";
 
 const Account = ({ navigation }) => {
-
   const { cart, cartAction } = useCartContext();
   const userStore = React.useContext(userContext);
 
-
   return (
-    <SafeAreaView style={{backgroundColor:'#FAFAFA'}}>
-      <View style={styles.container}>
-      <View style={styles.header}></View>
-      <Image
-        style={styles.avatar}
-        source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
-      />
-      <View style={styles.body}>
-        <View style={{ alignItems: 'center', marginTop: 40 }}>
-          <Text style={styles.name}>{userStore.profile.username}</Text>
-          {
-            userStore.profile.userDetail && (
+    <SafeAreaView style={styles.container}>
+      <View>
+        <View style={styles.header}></View>
+        <Image
+          style={styles.avatar}
+          source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
+        />
+        <View style={styles.body}>
+          <View style={{ alignItems: "center", marginTop: 40 }}>
+            <Text style={styles.name}>{userStore.profile.username}</Text>
+            {userStore.profile.userDetail && (
               <>
-                <Text style={styles.info}>{`${userStore.profile.userDetail.firstname} ${userStore.profile.userDetail.lastname}`}</Text>
+                <Text
+                  style={styles.info}
+                >{`${userStore.profile.userDetail.firstname} ${userStore.profile.userDetail.lastname}`}</Text>
                 <Text style={styles.description}>
                   {`
                 Store Name : ${userStore.profile.userDetail.storeName} \n
@@ -41,18 +40,22 @@ const Account = ({ navigation }) => {
                 `}
                 </Text>
               </>
-            )
-          }
-          <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer} onPress={ () => {
-              navigation.navigate('LoginScreen');
-              }}>
-              <Text style={{fontWeight:'bold' , fontSize:20 , color:'#FFFFFF'}}>LOG OUT</Text>
-            </TouchableOpacity>
+            )}
+            <View style={styles.bodyContent}>
+              <TouchableOpacity
+                style={styles.buttonContainer}
+                onPress={() => {
+                  navigation.navigate("LoginScreen");
+                }}
+              >
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  LOG OUT
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
-    </View>
     </SafeAreaView>
   );
 };
@@ -61,9 +64,10 @@ export default Account;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"#FFFFFF"
-  }
-  ,header: {
+    backgroundColor: "#FFFFFF",
+    flex: 1,
+  },
+  header: {
     backgroundColor: "#6495ED",
     height: 200,
   },
@@ -85,7 +89,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
-    backgroundColor:"#FFFFFF"
   },
   name: {
     marginTop: 10,

@@ -46,7 +46,7 @@ const Account = ({ navigation }) => {
             <TouchableOpacity style={styles.buttonContainer} onPress={ () => {
               navigation.navigate('LoginScreen');
               }}>
-              <Text>Log Out</Text>
+              <Text style={{fontWeight:'bold' , fontSize:20 , color:'#FFFFFF'}}>LOG OUT</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -73,43 +73,37 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: 130,
   },
-  name: {
-    fontSize: 22,
-    color: "#FFFFFF",
-    fontWeight: "600",
-  },
   body: {
     marginTop: 40,
   },
   bodyContent: {
     flex: 1,
     alignItems: "center",
-    padding: 30,
+    padding: 20,
   },
   name: {
-    fontSize: 28,
-    color: "#696969",
+    marginTop: 10,
+    fontSize: 24,
+    color: "#000000",
     fontWeight: "600",
   },
   info: {
-    fontSize: 16,
+    fontSize: 20,
     color: "#6495ED",
     marginTop: 10,
   },
   description: {
     fontSize: 16,
     color: "#696969",
-    marginTop: 10,
     textAlign: "left",
   },
   buttonContainer: {
-    marginTop: 10,
     height: 45,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
-    width: 250,
+    width: 200,
     borderRadius: 30,
     backgroundColor: "#00BFFF",
   },

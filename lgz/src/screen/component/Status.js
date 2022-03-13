@@ -24,7 +24,7 @@ const Status = () => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView >
       <View style={{ alignItems: "center" }}>
         <ScrollView>
           {orders.map((orderdata, index) => {

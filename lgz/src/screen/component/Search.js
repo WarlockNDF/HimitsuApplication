@@ -45,7 +45,7 @@ const Search = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style = {{backgroundColor : "#FFFFFF"}}>
       <VStack>
         <VStack mt={10} w="100%" space={5} alignSelf="center">
           <Heading ml={5}>ค้นหาสินค้า</Heading>

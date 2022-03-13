@@ -26,7 +26,7 @@ const NearlyExpire = () => {
 
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style = {{backgroundColor : "#FFFFFF"}}>
     <View style={{ alignItems: 'center'}}>
             <ScrollView>
               {

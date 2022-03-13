@@ -25,7 +25,7 @@ const LowStockItems = ()=> {
   }, [])
   
   return (
-    <SafeAreaView>
+    <SafeAreaView style = {{backgroundColor : "#FFFFFF"}}>
     <View style={{ alignItems: 'center' }}>
             <ScrollView>
               {

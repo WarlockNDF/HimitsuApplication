@@ -17,7 +17,7 @@ import {
 
 moment.locale("th");
 
-const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,supplier, key}) => {
+const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,supplier, key, price}) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <View>
@@ -52,16 +52,16 @@ const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,
                 mt="2"
                 fontWeight="medium"
                 fontSize="xl"
-              >
+                >
                 {`Name: ` + name}
               </Text>
+              <Spacer />
+              <Text color="darkBlue.800" mt="4" mr="2" fontSize="md">
+                {`Quantity: ` + numberOfStock}
+                </Text>
+            </HStack>
               <Text mt="2" fontSize="sm" color="coolGray.700">
-                {"BBE: " + !bbe
-                  ? "ไม่มีการระบุ"
-                  : moment(bbe).format("LLL").toString()}
-              </Text>
-              <Text mt="2" fontSize="sm" color="coolGray.700">
-                {"Price: "}$12,850.05
+                {"Price: "}{price}
               </Text>
               <Flex>
                 <Badge
@@ -75,7 +75,6 @@ const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,
                   {numberOfStock === 0 ? "OUT OF STOCK" : "Available"}
                 </Badge>
               </Flex>
-              </HStack>
             </Box>
           );
         }}

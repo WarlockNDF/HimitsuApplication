@@ -79,7 +79,7 @@ const Search = ({ navigation }) => {
                       <ProductCard key={productinf.product.ProductID.toString()} navigation={navigation}
                         name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
                         productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
-                        supplier={productinf.product.supplier} />
+                        supplier={productinf.product.supplier} price={productinf.product.UnitPrice}/>
                     </>
                   )
                 })

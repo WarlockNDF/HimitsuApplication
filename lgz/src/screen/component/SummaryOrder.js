@@ -37,14 +37,6 @@ const SummaryOrder = ({ navigation }) => {
     }
   };
 
-  const getQty = (id) => {
-    let idx = cart.datas.findIndex(
-      (cartProduct) => cartProduct.productID === id
-    );
-    if (idx === -1) return;
-    return cart.datas[idx].Quantity;
-  };
-
   useEffect(async () => {
     loopData();
     getProduct();
@@ -60,8 +52,10 @@ const SummaryOrder = ({ navigation }) => {
         quantity: data.Quantity
       })
     })
+    console.log(createData);
     await http.post("order", createData).then(async (res)=> {
-      consolse.log(res.data)
+      console.log(res.data)
+      alert(res.data.message)
     }).catch((err) => {
       console.error(err);
       alert("Can't Create Order!!")
@@ -80,8 +74,7 @@ const SummaryOrder = ({ navigation }) => {
           return (
             <>
               <Text>
-                {product.ProductName + " " + `${getQty(product.ProductID)}`}
-                {dataPost.push({productId: product.ProductID},{quantity: getQty(product.ProductID)})} 
+                {product.ProductName + " " + `${cartAction.getCurrentCount(product.ProductID)}`}
               </Text>
             </>
           );

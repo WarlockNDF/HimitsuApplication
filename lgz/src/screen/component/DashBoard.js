@@ -45,6 +45,7 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
+                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -68,6 +69,14 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
+                      <Text
+                        color="#FA2020"
+                        fontWeight="bold"
+                        fontSize="lg"
+                        mb="2"
+                      >
+                        Nearly Expire
+                      </Text>
                       <Image
                         source={require("../../../assets/logo/clock-expire.png")}
                         style={{ width: 80, height: 80 }}
@@ -84,6 +93,7 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
+                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -107,6 +117,14 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
+                    <Text
+                        color="coolGray.800"
+                        fontWeight="bold"
+                        fontSize="lg"
+                        mb="2"
+                      >
+                        Order
+                      </Text>
                       <Image
                         source={require("../../../assets/logo/wheelbarrow.png")}
                         style={{ width: 80, height: 80 }}
@@ -125,6 +143,7 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
+                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -148,6 +167,14 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
+                    <Text
+                        color="#FFAD2D"
+                        fontWeight="bold"
+                        fontSize="lg"
+                        mb="2"
+                      >
+                        Low Stock
+                      </Text>
                       <Image
                         source={require("../../../assets/logo/out-of-stock.png")}
                         style={{ width: 80, height: 80 }}
@@ -164,6 +191,7 @@ const DashBoard = ({ navigation }) => {
               return (
                 <Box
                   width="40"
+                  height="40"
                   borderWidth="1"
                   borderColor="coolGray.300"
                   shadow="3"
@@ -187,6 +215,14 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
+                    <Text
+                        color="coolGray.800"
+                        fontWeight="bold"
+                        fontSize="lg"
+                        mb="2"
+                      >
+                        Stock
+                      </Text>
                       <Image
                         source={require("../../../assets/logo/packages.png")}
                         style={{ width: 80, height: 80 }}

@@ -61,7 +61,7 @@ const OrderDetail = ({ navigation, route }) => {
                   Product = {ProductName} : {UnitPrice} Baht
                 </Text>
                 <Text style={{ fontSize: 20, marginRight: 15 }}>
-                  Supplier = {supplier.SupplierName} : {supplier.Location} : {supplier.PhoneNumber}
+                  Supplier = {supplier.SupplierName}, {supplier.Location} : {supplier.PhoneNumber}
                 </Text>
                 <Text style={{ fontSize: 20, marginRight: 15 }}>
                   Quantity = {quantity}

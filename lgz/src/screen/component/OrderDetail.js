@@ -47,7 +47,7 @@ const OrderDetail = ({ navigation, route }) => {
       <View style={styles.container}>
         <ScrollView>
         <View style={{ marginTop: 10 }}>
-          <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 10 }}>{orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}</Text>
+          <Text style={{ fontSize: 15, marginLeft: 10, marginBottom: 10 }}>{orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}</Text>
           <View style={styles.line} />
 
         </View>
@@ -58,19 +58,19 @@ const OrderDetail = ({ navigation, route }) => {
           return (
             <>
               <View style={{ marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5}}>
+                <Text style={{ fontSize: 15, marginRight: 15 , marginBottom : 5}}>
                   Product = {ProductName} : {UnitPrice} Baht
                 </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
+                <Text style={{ fontSize: 15, marginRight: 15 , marginBottom : 5 }}>
                   Supplier = {supplier.SupplierName}, {supplier.Location} : {supplier.PhoneNumber}
                 </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
+                <Text style={{ fontSize: 15, marginRight: 15 , marginBottom : 5 }}>
                   Quantity = {quantity}
                 </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
+                <Text style={{ fontSize: 15, marginRight: 15 , marginBottom : 5 }}>
                   Type = {productType.TypeName}
                 </Text>       
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
+                <Text style={{ fontSize: 15, marginRight: 15 , marginBottom : 5 }}>
                   Total = {productTotal} Baht
                 </Text>
               </View>

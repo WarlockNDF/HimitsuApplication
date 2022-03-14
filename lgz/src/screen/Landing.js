@@ -34,7 +34,7 @@ const DashboardRouter = ({ navigation }) => {
         component={NearlyExpire}
       />
       <stackNav.Screen
-        options={{ title: "ORDERS", header: { color: "red" } }}
+        options={{ title: "ORDERS"}}
         name="orders"
         component={Order}
       />

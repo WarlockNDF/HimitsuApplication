@@ -18,7 +18,7 @@ import {
 import http from "../../service/http";
 import StatusCard from "../element/StatusCard";
 
-const Status = ({navigation}) => {
+const Status = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
 
   const getOrder = async () => {
@@ -38,13 +38,13 @@ const Status = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <VStack mt={10} w="100%" h="100%" space={"xs"}>
         <View>
           <Heading ml={5}>STATUS</Heading>
         </View>
-        <View style={{ alignItems: "center", flex:1}}>
-          <ScrollView>
+        <Center>
+          <ScrollView height="xl" marginTop={'10'}>
             {orders.map((orderdata, index) => {
               const { OrderID, Status, OrderDate } = orderdata;
               return (
@@ -60,7 +60,7 @@ const Status = ({navigation}) => {
               );
             })}
           </ScrollView>
-        </View>
+        </Center>
       </VStack>
     </SafeAreaView>
   );
@@ -74,5 +74,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 20,
   },
 });

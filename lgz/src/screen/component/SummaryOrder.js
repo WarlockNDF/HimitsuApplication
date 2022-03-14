@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { useCartContext } from "../../context/CartProvider";
 import http from "../../service/http";
 import { userContext } from "../../context/UserProvider";
-import { HStack,ScrollView,Spacer, VStack } from "native-base";
+import { HStack, ScrollView, Spacer, VStack } from "native-base";
 
 const SummaryOrder = ({ navigation }) => {
   const userStore = React.useContext(userContext);
@@ -43,66 +43,69 @@ const SummaryOrder = ({ navigation }) => {
     getProduct();
   }, []);
 
-  const test = [1001,20]
+  const test = [1001, 20];
 
   const createOrder = async () => {
-    let createData = []
+    let createData = [];
     cart.datas.forEach((data) => {
       createData.push({
-        productId : data.productID,
-        quantity: data.Quantity
-      })
-    })
+        productId: data.productID,
+        quantity: data.Quantity,
+      });
+    });
     console.log(createData);
-    await http.post("order", createData).then(async (res)=> {
-      console.log(res.data)
-      alert(res.data.message)
-    }).catch((err) => {
-      console.error(err);
-      alert("Can't Create Order!!")
-    })
-  }
+    await http
+      .post("order", createData)
+      .then(async (res) => {
+        console.log(res.data);
+        alert(res.data.message);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Can't Create Order!!");
+      });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView  >
-      <View style={{ margin: 10, alignItems : 'center' }}>
-        <Text style={{ fontSize: 24, fontWeight: "bold" , height : 50}}>
-          LIST PRODUCTS IN CART
-        </Text>
-
-      </View>
-
-      <View style = {{height : 350 }}>
-        {products.map((product) => {
-          return (
-            <>
-            <HStack>
-              <Text style = {{fontSize : 20, marginLeft : 10}}>
-                {product.ProductName + " "}
-              </Text>
-              <Spacer />
-              <View>
-              <Text style = {{fontSize : 20 , marginRight : 15}}>
-              {`${cartAction.getCurrentCount(product.ProductID)}`}
-              </Text>
-              </View>
-              </HStack>
-            </>
-          );
-        })}
-       
-      </View>
-      </ScrollView>
-      <View style = {{alignItems : 'center' ,marginTop : 300}}>
+      <View>
+          <View style={{ margin: 10, alignItems: "center" }}>
+            <Text style={{ fontSize: 24, fontWeight: "bold", height: 50 }}>
+              LIST PRODUCTS IN CART
+            </Text>
+          </View>
+          <VStack>
+          <View style={{ height: 350 }}>
+            {products.map((product) => {
+              return (
+                <>
+                  <HStack>
+                    <Text style={{ fontSize: 20, marginLeft: 10 }}>
+                      {product.ProductName + " "}
+                    </Text>
+                    <Spacer />
+                    <View>
+                      <Text style={{ fontSize: 20, marginRight: 15 }}>
+                        {`${cartAction.getCurrentCount(product.ProductID)}`}
+                      </Text>
+                    </View>
+                  </HStack>
+                </>
+              );
+            })}
+          </View>
+          <Spacer />
+      <View style={{ alignItems: "center"}}>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {
-           createOrder()
+            createOrder();
           }}
         >
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>SUBMIT ORDER</Text>
         </TouchableOpacity>
+      </View>
+      </VStack>
       </View>
     </SafeAreaView>
   );
@@ -133,6 +136,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginRight: 20,
     borderRadius: 10,
-    backgroundColor: '#FDFEFE',
+    backgroundColor: "#FDFEFE",
   },
 });

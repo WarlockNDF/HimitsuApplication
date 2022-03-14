@@ -43,51 +43,58 @@ const OrderDetail = ({ navigation, route }) => {
   }, []);
 
   return (
-    <SafeAreaView
-      style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}
-    >
-      <View>
-        <Text>
-          {orderBasicInfo.OrderDate} : {orderBasicInfo.OrderID}
-        </Text>
-        <Text>{orderTotal} BAHT(SUMMARY)</Text>
+    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}>
+      <View style={styles.container}>
+        <View style={{ marginTop: 10 }}>
+          <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 10 }}>{orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}</Text>
+          <View style={styles.line} />
+
+        </View>
+
         {orderDetails.map((detail, index) => {
           const { ProductID, quantity, productTotal, ProductName, UnitPrice, productType, supplier } =
             detail;
           return (
             <>
-              <Text>
-                Product = {ProductName} : {UnitPrice} Baht
-              </Text>
-              <Text>
-                Type = {productType.TypeName}
-              </Text>
-              <Text>
-                Supplier = {supplier.SupplierName} : {supplier.Location} : {supplier.PhoneNumber}
-               
-              </Text>
-              <Text>
-                Quantity = {quantity}
-              </Text>
-              <Text>
-                Total = {productTotal} Baht
-              </Text>
+              <View style={{ marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 20, marginRight: 15 }}>
+                  Product = {ProductName} : {UnitPrice} Baht
+                </Text>
+                <Text style={{ fontSize: 20, marginRight: 15 }}>
+                  Supplier = {supplier.SupplierName} : {supplier.Location} : {supplier.PhoneNumber}
+                </Text>
+                <Text style={{ fontSize: 20, marginRight: 15 }}>
+                  Quantity = {quantity}
+                </Text>
+                <Text style={{ fontSize: 20, marginRight: 15 }}>
+                  Type = {productType.TypeName}
+                </Text>       
+                <Text style={{ fontSize: 20, marginRight: 15 }}>
+                  Total = {productTotal} Baht
+                </Text>
+              </View>
+              <View style={styles.line} />
             </>
           );
         })}
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ fontSize: 20, marginLeft: 10, marginTop: 90, color: 'red', fontWeight: 'bold' }}>{orderTotal} BAHT(SUMMARY)</Text>
+        </View>
+
+        <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => {
+              alert("confirm order complete");
+            }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              Confirm Order
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => {
-            alert("confirm order complete");
-          }}
-        >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            Confirm Order
-          </Text>
-        </TouchableOpacity>
-      </View>
+
     </SafeAreaView>
   );
 };
@@ -105,5 +112,19 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 30,
     backgroundColor: "#f1c232",
+  },
+  container: {
+    height: 530,
+    width: 350,
+    marginLeft: 20,
+    borderWidth: 2,
+    marginRight: 20,
+    borderRadius: 10,
+    backgroundColor: "#FDFEFE",
+    marginTop: 10
+  },
+  line: {
+    borderBottomWidth: 2,
+    borderBottomColor: 'black',
   },
 });

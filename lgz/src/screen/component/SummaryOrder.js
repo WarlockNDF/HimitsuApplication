@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import { useCartContext } from "../../context/CartProvider";
 import http from "../../service/http";
 import { userContext } from "../../context/UserProvider";
+import { HStack,ScrollView,Spacer, VStack } from "native-base";
 
 const SummaryOrder = ({ navigation }) => {
   const userStore = React.useContext(userContext);
@@ -63,25 +64,37 @@ const SummaryOrder = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
-      <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView  >
+      <View style={{ margin: 10, alignItems : 'center' }}>
+        <Text style={{ fontSize: 24, fontWeight: "bold" , height : 50}}>
           LIST PRODUCTS IN CART
         </Text>
+
       </View>
-      <View>
+
+      <View style = {{height : 350 }}>
         {products.map((product) => {
           return (
             <>
-              <Text>
-                {product.ProductName + " " + `${cartAction.getCurrentCount(product.ProductID)}`}
+            <HStack>
+              <Text style = {{fontSize : 20, marginLeft : 10}}>
+                {product.ProductName + " "}
               </Text>
+              <Spacer />
+              <View>
+              <Text style = {{fontSize : 20 , marginRight : 15}}>
+              {`${cartAction.getCurrentCount(product.ProductID)}`}
+              </Text>
+              </View>
+              </HStack>
             </>
           );
         })}
+       
       </View>
-
-      <View>
+      </ScrollView>
+      <View style = {{alignItems : 'center' ,marginTop : 300}}>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {
@@ -112,5 +125,14 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 30,
     backgroundColor: "#f1c232",
+  },
+  container: {
+    height: 500,
+    marginTop: 23,
+    marginLeft: 20,
+    borderWidth: 2,
+    marginRight: 20,
+    borderRadius: 10,
+    backgroundColor: '#FDFEFE',
   },
 });

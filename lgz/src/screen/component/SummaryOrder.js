@@ -67,25 +67,36 @@ const SummaryOrder = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-          <View style={{ margin: 10, alignItems: "center" }}>
-            <Text style={{ fontSize: 24, fontWeight: "bold", height: 50 , color : '#40E0D0'}}>
-              LIST PRODUCTS IN CART
+    <SafeAreaView style={{ flex: 1, marginBottom: 2 }}>
+      <View style={{ margin: 10, alignItems: "center" }}>
+        <Text
+          style={{
+            marginTop: 5,
+            fontSize: 24,
+            fontWeight: "bold",
+            height: 50,
+            color: "#0294fe",
+          }}
+        >
+          LIST PRODUCTS IN CART
+        </Text>
+      </View>
+      <View style={styles.container}>
+        <HStack mt={"2"}>
+          <View>
+            <Text style={{ fontSize: 23, marginLeft: 10, fontWeight: "bold" }}>
+              Product
             </Text>
           </View>
-
-          <HStack>
+          <Spacer />
           <View>
-          <Text style={{ fontSize: 23, marginLeft: 10, fontWeight: "bold" }}>Product</Text>
+            <Text style={{ fontSize: 23, marginRight: 12, fontWeight: "bold" }}>
+              Piece
+            </Text>
           </View>
+        </HStack>
 
-          <View>
-          <Text style={{ fontSize: 23, marginLeft : 60, fontWeight: "bold" }}>Piece</Text>
-          </View>
-          </HStack>
-          
-          <VStack>
+        <VStack>
           <View style={{ height: 315 }}>
             {products.map((product) => {
               return (
@@ -106,17 +117,19 @@ const SummaryOrder = ({ navigation }) => {
             })}
           </View>
           <Spacer />
-      <View style={{ alignItems: "center"}}>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => {
-            createOrder();
-          }}
-        >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>SUBMIT ORDER</Text>
-        </TouchableOpacity>
-      </View>
-      </VStack>
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => {
+                createOrder();
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+                SUBMIT ORDER
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </VStack>
       </View>
     </SafeAreaView>
   );
@@ -124,11 +137,6 @@ const SummaryOrder = ({ navigation }) => {
 
 export default SummaryOrder;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 10,
-  },
   buttonContainer: {
     marginTop: 20,
     height: 45,
@@ -141,8 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1c232",
   },
   container: {
-    height: 500,
-    marginTop: 23,
+    height: 450,
     marginLeft: 20,
     borderWidth: 2,
     marginRight: 20,

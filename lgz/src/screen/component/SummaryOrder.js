@@ -70,18 +70,18 @@ const SummaryOrder = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View>
           <View style={{ margin: 10, alignItems: "center" }}>
-            <Text style={{ fontSize: 24, fontWeight: "bold", height: 50 }}>
+            <Text style={{ fontSize: 24, fontWeight: "bold", height: 50 , color : '#40E0D0'}}>
               LIST PRODUCTS IN CART
             </Text>
           </View>
 
           <HStack>
           <View>
-          <Text style={{ fontSize: 20, marginLeft: 10 }}>Product</Text>
+          <Text style={{ fontSize: 23, marginLeft: 10, fontWeight: "bold" }}>Product</Text>
           </View>
 
           <View>
-          <Text style={{ fontSize: 20, marginLeft : 60 }}>Piece</Text>
+          <Text style={{ fontSize: 23, marginLeft : 60, fontWeight: "bold" }}>Piece</Text>
           </View>
           </HStack>
           
@@ -91,12 +91,12 @@ const SummaryOrder = ({ navigation }) => {
               return (
                 <>
                   <HStack>
-                    <Text style={{ fontSize: 20, marginLeft: 10 }}>
+                    <Text style={{ fontSize: 18, marginLeft: 10 }}>
                       {product.ProductName + " "}
                     </Text>
                     <Spacer />
                     <View>
-                      <Text style={{ fontSize: 20, marginRight: 15 }}>
+                      <Text style={{ fontSize: 18, marginRight: 15 }}>
                         {`${cartAction.getCurrentCount(product.ProductID)}`}
                       </Text>
                     </View>

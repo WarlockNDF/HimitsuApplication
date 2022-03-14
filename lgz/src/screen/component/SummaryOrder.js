@@ -74,7 +74,7 @@ const SummaryOrder = ({ navigation }) => {
             marginTop: 5,
             fontSize: 24,
             fontWeight: "bold",
-            height: 50,
+            height: 32,
             color: "#0294fe",
           }}
         >
@@ -97,7 +97,7 @@ const SummaryOrder = ({ navigation }) => {
         </HStack>
 
         <VStack>
-          <View style={{ height: 315 }}>
+          <View style={{ height: 360 }}>
             {products.map((product) => {
               return (
                 <>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1c232",
   },
   container: {
-    height: 450,
+    height: 480,
     marginLeft: 20,
     borderWidth: 2,
     marginRight: 20,

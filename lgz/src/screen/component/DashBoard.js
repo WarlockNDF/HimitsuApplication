@@ -34,7 +34,7 @@ function datepick(dateVar){
   dateVar.forEach(customdateFunction);
   function customdateFunction(item){
     customDatesStyles.push({
-      date: moment(item).format("L"),
+      date: item,
       // Random colors
       style: {backgroundColor: '#FFC94B'},
       textStyle: {color: 'black'}, // sets the font color
@@ -86,14 +86,14 @@ const DashBoard = ({ navigation }) => {
             {
               products.map((productinf,index)=>{
                 const { BBE } = productinf;
-                bbeArr.push(moment(BBE).format("L"));
+                bbeArr.push(moment(new Date(BBE)).format("L"));
               })
             }
             <CalendarPicker width={330} minDate={moment().startOf('month')} 
             maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)} 
             onDateChange={(date)=>{
-              setbbeinfo(bbeData(moment(date).format("MM-DD-YYYY")));
-              //setShowModal(true);
+              setbbeinfo(bbeData(moment(new Date(date)).format("MM-DD-YYYY")));
+              setShowModal(true);
             }}/>
           </Box>
         </View>

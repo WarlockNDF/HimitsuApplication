@@ -42,13 +42,16 @@ const OrderDetail = ({ navigation, route }) => {
       style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}
     >
       <View>
+      <Text>{ID}</Text>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {
-           alert('confirm order complete');
+            alert("confirm order complete");
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Confirm Order</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            Confirm Order
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -58,7 +61,7 @@ const OrderDetail = ({ navigation, route }) => {
 export default OrderDetail;
 
 const styles = StyleSheet.create({
-buttonContainer: {
+  buttonContainer: {
     marginTop: 20,
     height: 45,
     flexDirection: "row",

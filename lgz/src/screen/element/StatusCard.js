@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Pressable,
   Text,
@@ -9,57 +9,87 @@ import {
   Center,
   NativeBaseProvider,
   Badge,
+  Modal,
+  View,
+  Button,
 } from "native-base";
+import moment from "moment";
 
-const StatusCard = ({ order, product, quantity }) => {
+const StatusCard = ({ navigation, orderID, orderDate, status }) => {
+  let ID = 0;
+  const setID = () => {
+    ID = orderID;
+  };
+
   return (
-    <Pressable mt={15}>
-      {({ isHovered, isFocused, isPressed }) => {
-        return (
-          <Box
-            width={96}
-            borderWidth="1"
-            borderColor="coolGray.300"
-            shadow="3"
-            bg={
-              isPressed
-                ? "coolGray.200"
-                : isHovered
-                ? "coolGray.200"
-                : "coolGray.100"
-            }
-            p="5"
-            rounded="8"
-            style={{
-              transform: [
-                {
-                  scale: isPressed ? 0.96 : 1,
-                },
-              ],
-            }}
-          >
-            <HStack>
-              <Text color="coolGray.800" mt="3" fontWeight="bold" fontSize="xl">
-                {`Order : ` + order}
-              </Text>
-              <Spacer />
-              <Text color="darkBlue.800" mt="4" mr="2" fontSize="md">
-                {`Quantity : ` + quantity}
-              </Text>
-            </HStack>
-            <Text
-              color="coolGray.800"
-              mt="2"
-              fontWeight="medium"
-              fontSize="xs"
-              mb="2"
+    <View>
+      <Pressable
+        mt={15}
+        onPress={() => {
+          navigation.navigate("orderDetail", { ID });
+        }}
+      >
+        {({ isHovered, isFocused, isPressed }) => {
+          return (
+            <Box
+              width={"sm"}
+              borderWidth="1"
+              borderColor="coolGray.300"
+              shadow="3"
+              bg={
+                isPressed
+                  ? "coolGray.200"
+                  : isHovered
+                  ? "coolGray.200"
+                  : "white"
+              }
+              p="5"
+              rounded="8"
+              style={{
+                transform: [
+                  {
+                    scale: isPressed ? 0.96 : 1,
+                  },
+                ],
+              }}
             >
-              {`Product : ` + product}
-            </Text>
-          </Box>
-        );
-      }}
-    </Pressable>
+              <HStack>
+                <Text
+                  color="coolGray.800"
+                  mt="3"
+                  fontWeight="bold"
+                  fontSize="xl"
+                >
+                  {`Order ID : ` + orderID}
+                </Text>
+                {setID()}
+              </HStack>
+              <Text
+                color="coolGray.800"
+                fontWeight="medium"
+                fontSize="sm"
+                mb="2"
+              >
+                {`Order Date : ` + moment(orderDate).format("l")}
+              </Text>
+              <Flex>
+                <Badge
+                  colorScheme="success"
+                  _text={{
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                  variant="solid"
+                  rounded="2"
+                >
+                  {status}
+                </Badge>
+              </Flex>
+            </Box>
+          );
+        }}
+      </Pressable>
+    </View>
   );
 };
 

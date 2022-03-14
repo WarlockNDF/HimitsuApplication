@@ -11,15 +11,21 @@ import {
   Badge,
 } from "native-base";
 
-const OrderProductCard = ({ navigation, productID ,productName, typeName, supplierName }) => {
+const OrderProductCard = ({
+  navigation,
+  productID,
+  productName,
+  typeName,
+  supplierName,
+}) => {
   return (
     <Pressable
       mt={15}
       onPress={() => {
         navigation.navigate("cartPage", {
-          productid:productID,
-          productname:productName,
-          supplierName:supplierName
+          productid: productID,
+          productname: productName,
+          supplierName: supplierName,
         });
       }}
     >
@@ -31,11 +37,7 @@ const OrderProductCard = ({ navigation, productID ,productName, typeName, suppli
             borderColor="coolGray.300"
             shadow="3"
             bg={
-              isPressed
-                ? "coolGray.200"
-                : isHovered
-                ? "coolGray.200"
-                : "coolGray.100"
+              isPressed ? "coolGray.200" : isHovered ? "coolGray.200" : "white"
             }
             p="5"
             rounded="8"
@@ -52,8 +54,8 @@ const OrderProductCard = ({ navigation, productID ,productName, typeName, suppli
                 {`Name : ` + productName}
               </Text>
               <Spacer />
-              <Text color="darkBlue.800" mt="4" mr="2" fontSize="md">
-                {`Supplier : ` + supplierName}
+              <Text color="darkBlue.800" mt="4" mr="2" fontSize="md" fontWeight="bold">
+                {typeName}
               </Text>
             </HStack>
             <Text
@@ -63,7 +65,7 @@ const OrderProductCard = ({ navigation, productID ,productName, typeName, suppli
               fontSize="xs"
               mb="2"
             >
-              {`Type : ` + typeName}
+              {`Supplier : ` + supplierName}
             </Text>
           </Box>
         );

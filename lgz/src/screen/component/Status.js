@@ -1,10 +1,24 @@
-import { StyleSheet, View, SafeAreaView } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { VStack, Input, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box, Divider, Heading, Select, ScrollView } from "native-base";
+import { StyleSheet, View, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  VStack,
+  Input,
+  Button,
+  IconButton,
+  Icon,
+  Text,
+  NativeBaseProvider,
+  Center,
+  Box,
+  Divider,
+  Heading,
+  Select,
+  ScrollView,
+} from "native-base";
 import http from "../../service/http";
 import StatusCard from "../element/StatusCard";
 
-const Status = () => {
+const Status = ({navigation}) => {
   const [orders, setOrders] = useState([]);
 
   const getOrder = async () => {
@@ -24,24 +38,30 @@ const Status = () => {
   }, []);
 
   return (
-    <SafeAreaView >
-      <View style={{ alignItems: "center" }}>
-        <ScrollView>
-          {orders.map((orderdata, index) => {
-            const { order, Quantity, product } = orderdata;
-            return (
-              <>
-                <StatusCard
-                  key={order.OrderID + index}
-                  order={order.OrderID}
-                  product={product.ProductName}
-                  quantity={Quantity}
-                />
-              </>
-            );
-          })}
-        </ScrollView>
-      </View>
+    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
+      <VStack mt={10} w="100%" h="100%" space={"xs"}>
+        <View>
+          <Heading ml={5}>STATUS</Heading>
+        </View>
+        <View style={{ alignItems: "center", flex:1}}>
+          <ScrollView>
+            {orders.map((orderdata, index) => {
+              const { OrderID, Status, OrderDate } = orderdata;
+              return (
+                <>
+                  <StatusCard
+                    key={OrderID + index}
+                    navigation={navigation}
+                    orderID={OrderID}
+                    orderDate={OrderDate}
+                    status={Status}
+                  />
+                </>
+              );
+            })}
+          </ScrollView>
+        </View>
+      </VStack>
     </SafeAreaView>
   );
 };

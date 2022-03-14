@@ -13,7 +13,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cart from "./component/Cart";
 import SummaryOrder from "./component/SummaryOrder";
-
+import OrderDetail from "./component/OrderDetail";
 
 const stackNav = createStackNavigator();
 const bottomTabNav = createBottomTabNavigator();
@@ -34,7 +34,7 @@ const DashboardRouter = ({ navigation }) => {
         component={NearlyExpire}
       />
       <stackNav.Screen
-        options={{ title: "ORDERS" }}
+        options={{ title: "ORDERS", header: { color: "red" } }}
         name="orders"
         component={Order}
       />
@@ -49,12 +49,12 @@ const DashboardRouter = ({ navigation }) => {
         component={StockItems}
       />
       <stackNav.Screen
-        options={{ title: "CART PAGE"}}
+        options={{ title: "CART PAGE" }}
         name="cartPage"
         component={Cart}
       />
       <stackNav.Screen
-        options={{ title: "SUMMARY PAGE"}}
+        options={{ title: "SUMMARY PAGE" }}
         name="summary"
         component={SummaryOrder}
       />
@@ -62,7 +62,24 @@ const DashboardRouter = ({ navigation }) => {
   );
 };
 
-
+const StatusRoute = ({ navigation }) => {
+  return (
+    <stackNav.Navigator initialRouteName="status">
+      <stackNav.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="status"
+        component={Status}
+      />
+      <stackNav.Screen
+        options={{ title: "Order Detail" }}
+        name="orderDetail"
+        component={OrderDetail}
+      />
+    </stackNav.Navigator>
+  );
+};
 
 const Landing = () => {
   return (
@@ -95,7 +112,7 @@ const Landing = () => {
     >
       <bottomTabNav.Screen name="home" component={DashboardRouter} />
       <bottomTabNav.Screen name="search" component={Search} />
-      <bottomTabNav.Screen name="status" component={Status} />
+      <bottomTabNav.Screen name="status" component={StatusRoute} />
       <bottomTabNav.Screen name="account" component={Account} />
     </bottomTabNav.Navigator>
   );

@@ -24,8 +24,8 @@ const Order = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style = {{backgroundColor : "#FFFFFF"}}>
-      <View style={{ alignItems: "center" }}>
+    <SafeAreaView style = {{backgroundColor : "#FFFFFF", flex:1}}>
+      <View style={{ alignItems: "center" , flex:1}}>
         <ScrollView>
           {products.map((product, index) => {
             const { ProductID, ProductName, productType, supplier } = product;

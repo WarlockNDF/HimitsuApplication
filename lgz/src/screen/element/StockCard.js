@@ -17,7 +17,7 @@ const StockCard = ({ name, typeName, numberOfStock, stockID }) => {
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
-            width={96}
+            width={'sm'}
             borderWidth="1"
             borderColor="coolGray.300"
             shadow="3"

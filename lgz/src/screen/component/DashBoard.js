@@ -65,18 +65,13 @@ const DashBoard = ({ navigation }) => {
     bbeAll();
   }, []);
   const [bbeinfo,setbbeinfo] = useState([]);
-  //const [bbedateVar,setbbedateVar] = useState("");
-  const bbeData = async(bbedateVar)=>{
-    try {
-      console.log(`bbeData : ${bbedateVar}`)
-      const { status, data } = await http.get(`stock/bbestock/${bbedateVar}`)
-      if (status !== 200) throw "Can't Get BBE Data"
-      setbbeinfo([...data.data])
-      //console.log(bbeinfo);
-    } catch (err) {
-      console.log(err.messsage);
-      alert("ไม่สามารถดึงข้อมูลได้");
-    }
+  const bbeData = async (bbedateVar)=>{
+    return await http.get(`stock/bbestock/${bbedateVar}`).then(function (response) {
+      console.log(response.data.data); 
+      return response.data.data;}).catch(function (error) {
+        console.log(error);
+        alert("ไม่สามารถดึงข้อมูลได้");
+    });
   }
   
   
@@ -97,9 +92,7 @@ const DashBoard = ({ navigation }) => {
             <CalendarPicker width={330} minDate={moment().startOf('month')} 
             maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)} 
             onDateChange={(date)=>{
-              //setbbedateVar(moment(date).format("MM-DD-YYYY"));
-              alert(moment(date).format("MM-DD-YYYY"))
-              bbeData(moment(date).format("MM-DD-YYYY"));
+              setbbeinfo(bbeData(moment(date).format("MM-DD-YYYY")));
               //setShowModal(true);
             }}/>
           </Box>

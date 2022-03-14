@@ -48,30 +48,29 @@ const OrderDetail = ({ navigation, route }) => {
     >
       <View>
         <Text>
-          {orderBasicInfo.OrderID}:{orderBasicInfo.OrderDate}:
-          {orderBasicInfo.Status}
+          {orderBasicInfo.OrderDate} : {orderBasicInfo.OrderID}
         </Text>
-        <Text>{orderTotal} BATH(SUMMARY)</Text>
+        <Text>{orderTotal} BAHT(SUMMARY)</Text>
         {orderDetails.map((detail, index) => {
           const { ProductID, quantity, productTotal, ProductName, UnitPrice, productType, supplier } =
             detail;
           return (
             <>
               <Text>
-                Product-{ProductID}:{ProductName}:{UnitPrice}
+                Product = {ProductName} : {UnitPrice} Baht
               </Text>
               <Text>
-                Type-{productType.TypeID}:{productType.TypeName}
+                Type = {productType.TypeName}
               </Text>
               <Text>
-                Supplier-{supplier.SupplierID}:{supplier.SupplierName}:{supplier.PhoneNumber}
-                :{supplier.Location}
+                Supplier = {supplier.SupplierName} : {supplier.Location} : {supplier.PhoneNumber}
+               
               </Text>
               <Text>
-                Quantity-{quantity}:
+                Quantity = {quantity}
               </Text>
               <Text>
-                Total-{productTotal}:
+                Total = {productTotal} Baht
               </Text>
             </>
           );

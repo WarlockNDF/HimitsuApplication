@@ -45,6 +45,7 @@ const OrderDetail = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}>
       <View style={styles.container}>
+        <ScrollView>
         <View style={{ marginTop: 10 }}>
           <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 10 }}>{orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}</Text>
           <View style={styles.line} />
@@ -77,6 +78,7 @@ const OrderDetail = ({ navigation, route }) => {
             </>
           );
         })}
+        </ScrollView>
         <View style={{ alignItems: 'center' }}>
           <Text style={{ fontSize: 20, marginLeft: 10, marginTop: 90, color: 'red', fontWeight: 'bold' }}>{orderTotal} BAHT(SUMMARY)</Text>
         </View>
@@ -94,7 +96,6 @@ const OrderDetail = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
-
     </SafeAreaView>
   );
 };

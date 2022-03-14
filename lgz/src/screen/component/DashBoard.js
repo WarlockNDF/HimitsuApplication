@@ -13,6 +13,8 @@ import {
   Spacer,
   Flex,
   Badge,
+  Modal,
+  Button
 } from "native-base";
 import React, { useEffect,useState } from "react";
 import {
@@ -51,19 +53,15 @@ const DashBoard = ({ navigation }) => {
       const { status, data } = await http.get('stock/nearlyexpire')
       if (status !== 200) throw "Can't Get Product"
       setProducts([...data.data])
-      console.log(`set Product Logs: ${products}`);
+      console.log(products);
     } catch (err) {
       console.log(err.messsage);
       alert("ไม่สามารถดึงข้อมูลได้");
     }
   }
   let bbeArr = [];
-  useEffect(async () => {
-    await bbeData();
-    /* products.forEach(bbedataloop)
-    function bbedataloop(item){
-      bbeArr.push(moment(item.BBE).format("L"));
-    } */
+  useEffect(() => {
+    bbeData();
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
@@ -74,10 +72,12 @@ const DashBoard = ({ navigation }) => {
         <View style={{ alignItems: "center" }}>
           <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
             {
-              products.BBE && (
-                <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"] )} />
-              )
+              products.map((productinf,index)=>{
+                const { BBE } = productinf;
+                bbeArr.push(moment(BBE).format("L"));
+              })
             }
+            <CalendarPicker width={330} customDatesStyles={datepick(bbeArr)}/>
           </Box>
         </View>
       </View>

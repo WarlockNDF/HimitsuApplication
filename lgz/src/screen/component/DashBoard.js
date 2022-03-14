@@ -39,7 +39,7 @@ function datepick(dateVar){
       style: {backgroundColor: '#FFC94B'},
       textStyle: {color: 'black'}, // sets the font color
       containerStyle: [], // extra styling for day container
-      allowDisabled: true, // allow custom style to apply to disabled dates
+      allowDisabled: false, // allow custom style to apply to disabled dates
     });
   }
   return(customDatesStyles);
@@ -47,10 +47,11 @@ function datepick(dateVar){
 
 /* ["20220307","20220309"] */
 const DashBoard = ({ navigation }) => {
+  const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
-  const bbeData = async()=>{
+  const bbeAll = async()=>{
     try {
-      const { status, data } = await http.get('stock/nearlyexpire')
+      const { status, data } = await http.get('stock')
       if (status !== 200) throw "Can't Get Product"
       setProducts([...data.data])
       console.log(products);
@@ -61,8 +62,24 @@ const DashBoard = ({ navigation }) => {
   }
   let bbeArr = [];
   useEffect(() => {
-    bbeData();
+    bbeAll();
   }, []);
+  const [bbeinfo,setbbeinfo] = useState([]);
+  //const [bbedateVar,setbbedateVar] = useState("");
+  const bbeData = async(bbedateVar)=>{
+    try {
+      console.log(`bbeData : ${bbedateVar}`)
+      const { status, data } = await http.get(`stock/bbestock/${bbedateVar}`)
+      if (status !== 200) throw "Can't Get BBE Data"
+      setbbeinfo([...data.data])
+      //console.log(bbeinfo);
+    } catch (err) {
+      console.log(err.messsage);
+      alert("ไม่สามารถดึงข้อมูลได้");
+    }
+  }
+  
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
@@ -77,7 +94,14 @@ const DashBoard = ({ navigation }) => {
                 bbeArr.push(moment(BBE).format("L"));
               })
             }
-            <CalendarPicker width={330} customDatesStyles={datepick(bbeArr)}/>
+            <CalendarPicker width={330} minDate={moment().startOf('month')} 
+            maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)} 
+            onDateChange={(date)=>{
+              //setbbedateVar(moment(date).format("MM-DD-YYYY"));
+              alert(moment(date).format("MM-DD-YYYY"))
+              bbeData(moment(date).format("MM-DD-YYYY"));
+              //setShowModal(true);
+            }}/>
           </Box>
         </View>
       </View>
@@ -285,6 +309,22 @@ const DashBoard = ({ navigation }) => {
             }}
           </Pressable>
         </View>
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+      <Modal.Content maxWidth="400px">
+        <Modal.CloseButton />
+        <Modal.Header>Product Detail</Modal.Header>
+        <Modal.Body>
+          <Text>Product Name : {bbeinfo.BBE}</Text>
+          <Text>Supplier Name : </Text>
+          <Text>--------------------------------------------------------------</Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onPress={() => {setShowModal(false);}}>
+                close
+          </Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal>
       </View>
     </SafeAreaView>
   );

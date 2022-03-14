@@ -60,11 +60,12 @@ const DashBoard = ({ navigation }) => {
   let bbeArr = [];
   useEffect(async () => {
     await bbeData();
-    /* products.forEach(bbedataloop)
+    products.forEach(bbedataloop)
     function bbedataloop(item){
       bbeArr.push(moment(item.BBE).format("L"));
-    } */
+    }
   }, []);
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor:"#FFFFFF" }}>
       <View style={{ flex: 1, margin: 4, alignItems: "center" }}>
@@ -73,11 +74,7 @@ const DashBoard = ({ navigation }) => {
         </Text>
         <View style={{ alignItems: "center" }}>
           <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
-            {
-              products.BBE && (
-                <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"] )} />
-              )
-            }
+            <CalendarPicker width={330} customDatesStyles={datepick(["20220307","20220309"])} />
           </Box>
         </View>
       </View>

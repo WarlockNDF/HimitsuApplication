@@ -43,47 +43,69 @@ const OrderDetail = ({ navigation, route }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}>
+    <SafeAreaView
+      style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}
+    >
       <View style={styles.container}>
         <ScrollView>
-        <View style={{ marginTop: 10 }}>
-          <Text style={{ fontSize: 20, marginLeft: 10, marginBottom: 10 }}>{orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}</Text>
+          <Center>
+            <View style={{ margin: 20 }}>
+              <Text style={{ fontSize: 19, fontWeight: "bold" }}>
+                {orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}
+              </Text>
+            </View>
+          </Center>
           <View style={styles.line} />
 
-        </View>
-
-        {orderDetails.map((detail, index) => {
-          const { ProductID, quantity, productTotal, ProductName, UnitPrice, productType, supplier } =
-            detail;
-          return (
-            <>
-              <View style={{ marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5}}>
-                  Product = {ProductName} : {UnitPrice} Baht
-                </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
-                  Supplier = {supplier.SupplierName}, {supplier.Location} : {supplier.PhoneNumber}
-                </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
-                  Quantity = {quantity}
-                </Text>
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
-                  Type = {productType.TypeName}
-                </Text>       
-                <Text style={{ fontSize: 20, marginRight: 15 , marginBottom : 5 }}>
-                  Total = {productTotal} Baht
-                </Text>
-              </View>
-              <View style={styles.line} />
-            </>
-          );
-        })}
+          {orderDetails.map((detail, index) => {
+            const {
+              ProductID,
+              quantity,
+              productTotal,
+              ProductName,
+              UnitPrice,
+              productType,
+              supplier,
+            } = detail;
+            return (
+              <>
+                <View style={{ margin: 10 }}>
+                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                    Product = {ProductName} : {UnitPrice} Baht.
+                  </Text>
+                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                    Supplier = {supplier.SupplierName},{"\n"}
+                    {supplier.Location} : {supplier.PhoneNumber}
+                  </Text>
+                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                    Quantity = {quantity}
+                  </Text>
+                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                    Type = {productType.TypeName}
+                  </Text>
+                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                    Total = {productTotal} Baht.
+                  </Text>
+                </View>
+                <View style={styles.line} />
+              </>
+            );
+          })}
         </ScrollView>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ fontSize: 20, marginLeft: 10, marginTop: 90, color: 'red', fontWeight: 'bold'  }}>{orderTotal} BAHT(SUMMARY)</Text>
-        </View>
+        <Center>
+          <Text
+            style={{
+              fontSize: 19,
+              marginTop: 40,
+              color: "red",
+              fontWeight: "bold",
+            }}
+          >
+            {orderTotal} BAHT. (SUMMARY)
+          </Text>
+        </Center>
 
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: "center" }}>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => {
@@ -122,10 +144,10 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderRadius: 10,
     backgroundColor: "#FDFEFE",
-    marginTop: 10
+    marginTop: 10,
   },
   line: {
     borderBottomWidth: 2,
-    borderBottomColor: 'black',
+    borderBottomColor: "black",
   },
 });

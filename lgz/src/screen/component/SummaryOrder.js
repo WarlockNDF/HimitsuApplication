@@ -74,8 +74,19 @@ const SummaryOrder = ({ navigation }) => {
               LIST PRODUCTS IN CART
             </Text>
           </View>
+
+          <HStack>
+          <View>
+          <Text style={{ fontSize: 20, marginLeft: 10 }}>Product</Text>
+          </View>
+
+          <View>
+          <Text style={{ fontSize: 20, marginLeft : 60 }}>Piece</Text>
+          </View>
+          </HStack>
+          
           <VStack>
-          <View style={{ height: 350 }}>
+          <View style={{ height: 315 }}>
             {products.map((product) => {
               return (
                 <>

@@ -14,19 +14,24 @@ import {
   Heading,
   Select,
   ScrollView,
+  HStack,
 } from "native-base";
 import http from "../../service/http";
 
 const OrderDetail = ({ navigation, route }) => {
   const { ID } = route.params;
-  const [details, setDetails] = useState([]);
+  const [orderBasicInfo, setOrderBasicInfo] = useState([]);
+  const [orderDetails, setOrderDeatils] = useState([]);
+  const [orderTotal, setOrderTotal] = useState([]);
 
   const getDetail = async () => {
     try {
       const { status, data } = await http.get(`order/${ID}`);
       if (status !== 200) throw "No Order";
       console.log(data.data);
-      setDetails(data.data);
+      setOrderBasicInfo(data.data.order);
+      setOrderDeatils(data.data.details.products);
+      setOrderTotal(data.data.details.orderTotal);
     } catch (err) {
       alert(err.data.message);
       console.error(err.message);
@@ -42,7 +47,37 @@ const OrderDetail = ({ navigation, route }) => {
       style={{ backgroundColor: "#FFFFFF", flex: 1, alignItems: "center" }}
     >
       <View>
-      <Text>{ID}</Text>
+        <Text>
+          {orderBasicInfo.OrderID}:{orderBasicInfo.OrderDate}:
+          {orderBasicInfo.Status}
+        </Text>
+        <Text>{orderTotal} BATH(SUMMARY)</Text>
+        {orderDetails.map((detail, index) => {
+          const { ProductID, quantity, productTotal, ProductName, UnitPrice, productType, supplier } =
+            detail;
+          return (
+            <>
+              <Text>
+                Product-{ProductID}:{ProductName}:{UnitPrice}
+              </Text>
+              <Text>
+                Type-{productType.TypeID}:{productType.TypeName}
+              </Text>
+              <Text>
+                Supplier-{supplier.SupplierID}:{supplier.SupplierName}:{supplier.PhoneNumber}
+                :{supplier.Location}
+              </Text>
+              <Text>
+                Quantity-{quantity}:
+              </Text>
+              <Text>
+                Total-{productTotal}:
+              </Text>
+            </>
+          );
+        })}
+      </View>
+      <View>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => {

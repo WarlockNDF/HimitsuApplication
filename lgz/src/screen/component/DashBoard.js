@@ -14,7 +14,7 @@ import {
   Flex,
   Badge,
   Modal,
-  Button
+  Button,
 } from "native-base";
 import React, { useEffect, useState } from "react";
 import {
@@ -27,81 +27,95 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 import http from "../../service/http";
-import * as Notifications from 'expo-notifications';
+import * as Notifications from "expo-notifications";
 
 function datepick(dateVar) {
   let customDatesStyles = [];
-  console.log(dateVar)
+  console.log(dateVar);
   dateVar.forEach(customdateFunction);
   function customdateFunction(item) {
     customDatesStyles.push({
       date: item,
       // Random colors
-      style: { backgroundColor: '#FFC94B' },
-      textStyle: { color: 'black' }, // sets the font color
+      style: { backgroundColor: "#FFC94B" },
+      textStyle: { color: "black" }, // sets the font color
       containerStyle: [], // extra styling for day container
       allowDisabled: false, // allow custom style to apply to disabled dates
     });
   }
-  return (customDatesStyles);
+  return customDatesStyles;
 }
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldPlaySound: true,
     shouldSetBadge: false,
-    shouldShowAlert: true
-  })
-})
+    shouldShowAlert: true,
+  }),
+});
 
-async function welcomeNotification(data) {
+async function expireToday(count) {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "Product In Stock Expire Today",
-      body: "EIEI",
-      data: { data: "World" }
+      body: `มีสินค้าหมดอายุวันนี้จำนวน ${count}`,
+      data: { exprireToday: count },
     },
-    trigger: { seconds: 2 }
-  })
+    trigger: { seconds: 2 },
+  });
 }
 
 /* ["20220307","20220309"] */
 const DashBoard = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [bbeArr, setBbeArr] = useState([]);
 
-
-  let bbeArr = [];
   const bbeAll = async () => {
     try {
-      const { status, data } = await http.get('stock')
-      if (status !== 200) throw "Can't Get Product"
-      setProducts([...data.data])
+      const { status, data } = await http.get("stock");
+      if (status !== 200) throw "Can't Get Product";
+      setProducts([...data.data]);
       console.log(products);
     } catch (err) {
       console.log(err.messsage);
       alert("ไม่สามารถดึงข้อมูลได้");
     }
-  }
+  };
   const [bbeinfo, setbbeinfo] = useState([]);
   const bbeData = async (bbedateVar) => {
     try {
-      const { status, data } = await http.get(`stock/bbe/${bbedateVar}`)
-      if (status !== 200) throw "Can't Get Product"
-      setbbeinfo([...data.data])
+      const { status, data } = await http.get(`stock/bbe/${bbedateVar}`);
+      if (status !== 200) throw "Can't Get Product";
+      setbbeinfo([...data.data]);
       console.log(bbeinfo);
     } catch (err) {
       console.log(err.messsage);
       alert("ไม่สามารถดึงข้อมูลได้");
     }
-  }
+  };
 
-
-  useEffect(() => {
-    bbeAll();
+  useEffect(async () => {
+    await bbeAll();
   }, []);
 
-
+  useEffect(async () => {
+    let temp = [];
+    let notiData = [];
+    let count = 0;
+    products.map((productinf, index) => {
+      // console.log(productinf);
+      const { BBE } = productinf;
+      let tempDate = new Date();
+      if (tempDate.toISOString().split("T")[0] === BBE.split("T")[0]) {
+        notiData.push(productinf);
+        count++
+      }
+      temp.push(tempDate.toISOString());
+    });
+    setBbeArr([...temp]);
+    if (notiData.length > 0) await expireToday(count);
+  }, [products]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
@@ -110,21 +124,19 @@ const DashBoard = ({ navigation }) => {
           DASHBOARD
         </Text>
         <View style={{ alignItems: "center" }}>
-          <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
-            {
-              products.map((productinf, index) => {
-                const { BBE } = productinf;
-                bbeArr.push(moment(new Date(BBE)).format("L"));
-              })
-            }
-            <CalendarPicker width={330} minDate={moment().startOf('month')}
-              maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)}
-              onDateChange={async (date) => {
-                await bbeData(new Date(date).toISOString())
-                if (bbeinfo.length === 0) return
-                setShowModal(true);
-              }} />
-          </Box>
+        <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
+              <CalendarPicker width={330} minDate={moment().startOf('month')}
+                maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)}
+                onDateChange={async (date) => {
+                  await bbeData(new Date(date).toISOString())
+                  console.log(`BBE: ${bbeinfo.length}`);
+                  // bbeinfo.forEach((data) => {
+                  //   console.log(`BBEDATA : ${data}`);
+                  // })
+                  if (bbeinfo.length === 0) return
+                  setShowModal(true);
+                }} />
+            </Box>
         </View>
       </View>
       <View
@@ -135,7 +147,6 @@ const DashBoard = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-
         <View style={{ flexDirection: "row" }}>
           <Pressable onPress={() => navigation.navigate("checkExpire")}>
             {({ isHovered, isFocused, isPressed }) => {
@@ -311,12 +322,7 @@ const DashBoard = ({ navigation }) => {
                 >
                   <VStack>
                     <Center>
-                      <Text
-                        color="#000"
-                        fontWeight="bold"
-                        fontSize="md"
-                        mb="2"
-                      >
+                      <Text color="#000" fontWeight="bold" fontSize="md" mb="2">
                         STOCKS
                       </Text>
                       <Image
@@ -336,25 +342,36 @@ const DashBoard = ({ navigation }) => {
             <Modal.CloseButton />
             <Modal.Header>รายการของหมดอายุวันนี้</Modal.Header>
             <Modal.Body>
-              {
-                bbeinfo.map((product, index) => {
-                  console.log(product);
-                  return (
-                    <>
-                      <View key={index} style={{borderBottomColor:"black", borderBottomWidth:2, marginTop:5}}>
-                        <Text>StockID Id: {product.StockID}</Text>
-                        <Text>Product Name: {product.ProductName}</Text>
-                        <Text>Product Quantity: {product.Quantity}</Text>
-                        <Text>Product TypeName: {product.product.productType.TypeName}</Text>
-                        <Text>Lot Number: {product.lot}</Text>
-                      </View>
-                    </>
-                  )
-                })
-              }
+              {bbeinfo.map((product, index) => {
+                console.log(product);
+                return (
+                  <>
+                    <View
+                      key={index}
+                      style={{
+                        borderBottomColor: "black",
+                        borderBottomWidth: 2,
+                        marginTop: 5,
+                      }}
+                    >
+                      <Text>StockID Id: {product.StockID}</Text>
+                      <Text>Product Name: {product.ProductName}</Text>
+                      <Text>Product Quantity: {product.Quantity}</Text>
+                      <Text>
+                        Product TypeName: {product.product.productType.TypeName}
+                      </Text>
+                      <Text>Lot Number: {product.lot}</Text>
+                    </View>
+                  </>
+                );
+              })}
             </Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => { setShowModal(false); }}>
+              <Button
+                onPress={() => {
+                  setShowModal(false);
+                }}
+              >
                 close
               </Button>
             </Modal.Footer>

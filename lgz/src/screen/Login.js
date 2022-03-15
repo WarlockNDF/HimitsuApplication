@@ -25,7 +25,7 @@ async function welcomeNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title:"We Are Himitsu",
-      body: "EIEI",
+      body: "Welcome to Himitsu Application",
       data: { data : "World"}
     },
     trigger: {seconds:2}

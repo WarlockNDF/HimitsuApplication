@@ -49,6 +49,9 @@ function datepick(dateVar){
 const DashBoard = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+
+
+  let bbeArr = [];
   const bbeAll = async()=>{
     try {
       const { status, data } = await http.get('stock')
@@ -60,19 +63,22 @@ const DashBoard = ({ navigation }) => {
       alert("ไม่สามารถดึงข้อมูลได้");
     }
   }
-  let bbeArr = [];
+  const [bbeinfo,setbbeinfo] = useState([]);
+  const bbeData = async (bbedateVar)=>{
+    try {
+      const { status, data } = await http.get(`stock/bbe/${bbedateVar}`)
+      if (status !== 200) throw "Can't Get Product"
+      setbbeinfo([...data.data])
+      console.log(bbeinfo);
+    } catch (err) {
+      console.log(err.messsage);
+      alert("ไม่สามารถดึงข้อมูลได้");
+    }
+  }
   useEffect(() => {
     bbeAll();
   }, []);
-  const [bbeinfo,setbbeinfo] = useState([]);
-  const bbeData = async (bbedateVar)=>{
-    return await http.get(`stock/bbestock/${bbedateVar}`).then(function (response) {
-      console.log(response.data.data); 
-      return response.data.data;}).catch(function (error) {
-        console.log(error);
-        alert("ไม่สามารถดึงข้อมูลได้");
-    });
-  }
+
   
   
   return (
@@ -92,8 +98,8 @@ const DashBoard = ({ navigation }) => {
             <CalendarPicker width={330} minDate={moment().startOf('month')} 
             maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)} 
             onDateChange={(date)=>{
-              setbbeinfo(bbeData(moment(new Date(date)).format("MM-DD-YYYY")));
-              setShowModal(true);
+              setbbeinfo([bbeData(moment(new Date(date)).format("MM-DD-YYYY"))]);
+              //setShowModal(true);
             }}/>
           </Box>
         </View>
@@ -302,22 +308,20 @@ const DashBoard = ({ navigation }) => {
             }}
           </Pressable>
         </View>
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-      <Modal.Content maxWidth="400px">
-        <Modal.CloseButton />
-        <Modal.Header>Product Detail</Modal.Header>
-        <Modal.Body>
-          <Text>Product Name : {bbeinfo.BBE}</Text>
-          <Text>Supplier Name : </Text>
-          <Text>--------------------------------------------------------------</Text>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onPress={() => {setShowModal(false);}}>
-                close
-          </Button>
-        </Modal.Footer>
-      </Modal.Content>
-    </Modal>
+            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+              <Modal.Content maxWidth="400px">
+                <Modal.CloseButton />
+                <Modal.Header>Nearly Expire</Modal.Header>
+                <Modal.Body>
+                      <Text>Product Name : </Text>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onPress={() => {setShowModal(false);}}>
+                        close
+                  </Button>
+                </Modal.Footer>
+              </Modal.Content>
+            </Modal>
       </View>
     </SafeAreaView>
   );

@@ -35,7 +35,7 @@ const Status = ({ navigation }) => {
 
   useEffect(() => {
     getOrder();
-  }, []);
+  }, [{navigation}]);
 
   return (
     <SafeAreaView style={styles.container}>

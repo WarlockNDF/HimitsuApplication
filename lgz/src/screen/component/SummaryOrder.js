@@ -120,8 +120,9 @@ const SummaryOrder = ({ navigation }) => {
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={() => {
-                createOrder();
+              onPress={async () => {
+                await createOrder();
+                navigation.navigate("orders");
               }}
             >
               <Text style={{ fontSize: 20, fontWeight: "bold" }}>

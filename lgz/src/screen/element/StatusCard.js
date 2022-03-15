@@ -26,7 +26,7 @@ const StatusCard = ({ navigation, orderID, orderDate, status }) => {
       <Pressable
         mt={15}
         onPress={() => {
-          navigation.navigate("orderDetail", { ID });
+          navigation.navigate("orderDetail", { ID , status});
         }}
       >
         {({ isHovered, isFocused, isPressed }) => {
@@ -74,7 +74,7 @@ const StatusCard = ({ navigation, orderID, orderDate, status }) => {
               </Text>
               <Flex>
                 <Badge
-                  colorScheme="success"
+                  colorScheme={status === "SUCCESS"?"success":"danger"}
                   _text={{
                     color: "white",
                     fontWeight: "bold",

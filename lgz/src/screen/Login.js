@@ -7,10 +7,30 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import http from "../service/http";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { userContext } from "../context/UserProvider";
 import { VStack, FormControl, Input, Button } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Notifications from 'expo-notifications';
+
+Notifications.setNotificationHandler({
+  handleNotification: async() => ({
+    shouldPlaySound:true,
+    shouldSetBadge:false,
+    shouldShowAlert:true
+  })
+})
+
+async function welcomeNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title:"We Are Himitsu",
+      body: "EIEI",
+      data: { data : "World"}
+    },
+    trigger: {seconds:2}
+  })
+}
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -43,6 +63,13 @@ const Login = ({ navigation }) => {
         alert("fail to authen");
       });
   };
+
+  useEffect( async() => {
+    await welcomeNotification();
+    Notifications.addNotificationReceivedListener( notification => {
+      console.log(notification.request.content.data.data);
+    })
+  },[])
 
   function resetInput(){
     setLoading(false);

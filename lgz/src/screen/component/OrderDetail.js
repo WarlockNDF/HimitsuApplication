@@ -48,15 +48,20 @@ const OrderDetail = ({ navigation, route }) => {
     >
       <View style={styles.container}>
         <ScrollView>
-          <Center>
-            <View style={{ margin: 20 }}>
-              <Text style={{ fontSize: 19, fontWeight: "bold" }}>
-                {orderBasicInfo.OrderDate} : ID = {orderBasicInfo.OrderID}
-              </Text>
-            </View>
-          </Center>
-          <View style={styles.line} />
 
+            <HStack style = {{marginBottom : 15}}>
+            <View style={{ marginLeft : 10 , marginTop : 15 }}>
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+              Order {orderBasicInfo.OrderID}  
+              </Text>
+              </View>
+              <View style={{ marginLeft : 60 , marginTop : 15 }}>
+              <Text style={{ fontSize: 17, fontWeight: "bold" }}>
+                {orderBasicInfo.OrderDate}</Text>
+              </View>
+            </HStack>
+
+          <View style={styles.line} />
           {orderDetails.map((detail, index) => {
             const {
               ProductID,
@@ -70,20 +75,17 @@ const OrderDetail = ({ navigation, route }) => {
             return (
               <>
                 <View style={{ margin: 10 }}>
-                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
-                    Product = {ProductName} : {UnitPrice} Baht.
+                  <Text style={{ fontSize: 15, marginBottom: 5 }}>
+                  {ProductName} ({productType.TypeName}) 
                   </Text>
-                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
-                    Supplier = {supplier.SupplierName},{"\n"}
-                    {supplier.Location} : {supplier.PhoneNumber}
+                  <Text style={{ fontSize: 15, marginBottom: 5 }}>
+                  Quantity {quantity} * {UnitPrice}
                   </Text>
-                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
-                    Quantity = {quantity}
+                  <Text style={{ fontSize: 15, marginBottom: 5 }}>
+                  {supplier.SupplierName},{"\n"}
+                    {supplier.Location} {supplier.PhoneNumber}
                   </Text>
-                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
-                    Type = {productType.TypeName}
-                  </Text>
-                  <Text style={{ fontSize: 18, marginBottom: 5 }}>
+                  <Text style={{ fontSize: 15, marginBottom: 5 }}>
                     Total = {productTotal} Baht.
                   </Text>
                 </View>
@@ -101,7 +103,7 @@ const OrderDetail = ({ navigation, route }) => {
               fontWeight: "bold",
             }}
           >
-            {orderTotal} BAHT. (SUMMARY)
+           Summary Price : {orderTotal} Baht
           </Text>
         </Center>
 

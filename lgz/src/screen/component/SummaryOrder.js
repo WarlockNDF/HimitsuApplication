@@ -67,7 +67,7 @@ const SummaryOrder = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, marginBottom: 2 }}>
+    <SafeAreaView style={{ flex: 1, marginBottom: 2, backgroundColor : "#FFFFFF" }}>
       <View style={{ margin: 10, alignItems: "center" }}>
         <Text
           style={{

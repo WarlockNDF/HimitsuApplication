@@ -53,12 +53,12 @@ const Cart = ({ navigation, route }) => {
       <View>
         <Image
         source={require('../../../assets/Image.png')}
-        style={{ width: 250, height: 200,marginTop : 10 }}
+        style={{ width: 250, height: 200,marginTop : 10, borderWidth : 3}}
         />
       </View>
       <View style={{ alignItems: "center", margin: 10 }}>
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-          {productid}:{productname}
+         ID : {productid}  {productname}
         </Text>
         <Text style={{ fontSize: 16 }}>{supplierName}</Text>
       </View>
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 10,
+    backgroundColor : "#FFFFFF"
   },
   buttonContainer: {
     marginTop: 20,

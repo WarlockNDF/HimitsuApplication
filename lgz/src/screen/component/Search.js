@@ -26,9 +26,11 @@ const Search = ({ navigation }) => {
 
   const doSearch = async () => {
     try {
-      const { status, data } = await http.get(search === "" ? 'stock' : `stock/${search}`)
-      if (status !== 200) throw "Can't Get Product"
-      setProducts([...data.data])
+      const { status, data } = await http.get(
+        search === "" ? "stock" : `stock/${search}`
+      );
+      if (status !== 200) throw "Can't Get Product";
+      setProducts([...data.data]);
       console.log(`set Product Logs: ${products}`);
     } catch (err) {
       console.log(err.messsage);
@@ -45,49 +47,50 @@ const Search = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style = {{backgroundColor : "#FFFFFF"}}>
-      <VStack>
-        <VStack mt={10} w="100%" space={5} alignSelf="center">
-          <Heading ml={5}>ค้นหาสินค้า</Heading>
-          <View style={{ paddingLeft: 10, paddingRight: 10 }}>
-            <Input
-              onSubmitEditing={() => doSearch()}
-              onChangeText={(value) => setSearch(value)}
-              placeholder="Search"
-              InputRightElement={
-                <IconButton
-                  onPress={() => doSearch()}
-                  colorScheme="info"
-                  key={"ghost"}
-                  variant={"ghost"}
-                  _icon={{
-                    as: AntDesign,
-                    name: "search1",
-                  }}
-                />
-              }
+    <SafeAreaView style={{ backgroundColor: "#FFFFFF", flex: 1 }}>
+      <View style={{ marginTop: 30,paddingLeft: 15, paddingRight: 15 , flex:1}}>
+        <Input
+          onSubmitEditing={() => doSearch()}
+          onChangeText={(value) => setSearch(value)}
+          placeholder="Search"
+          InputRightElement={
+            <IconButton
+              onPress={() => doSearch()}
+              colorScheme="info"
+              key={"ghost"}
+              variant={"ghost"}
+              _icon={{
+                as: AntDesign,
+                name: "search1",
+              }}
             />
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <ScrollView height={"xl"}>
-              {
-                products.map((productinf, index) => {
-                  const { StockID, Quantity, BBE } = productinf;
-                  console.log(productinf);
-                  return (
-                    <>
-                      <ProductCard key={productinf.product.ProductID.toString()} navigation={navigation}
-                        name={productinf.product.ProductName} typeName={productinf.product.productType.TypeName}
-                        productId={productinf.product.ProductID} numberOfStock={Quantity} bbe={BBE}
-                        supplier={productinf.product.supplier} price={productinf.product.UnitPrice}/>
-                    </>
-                  )
-                })
-              }
-            </ScrollView>
-          </View>
-        </VStack>
-      </VStack>
+          }
+        />
+      </View>
+
+      <View style={{ alignItems: "center" , flex:9}}>
+        <ScrollView>
+          {products.map((productinf, index) => {
+            const { StockID, Quantity, BBE } = productinf;
+            console.log(productinf);
+            return (
+              <>
+                <ProductCard
+                  key={productinf.product.ProductID.toString()}
+                  navigation={navigation}
+                  name={productinf.product.ProductName}
+                  typeName={productinf.product.productType.TypeName}
+                  productId={productinf.product.ProductID}
+                  numberOfStock={Quantity}
+                  bbe={BBE}
+                  supplier={productinf.product.supplier}
+                  price={productinf.product.UnitPrice}
+                />
+              </>
+            );
+          })}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

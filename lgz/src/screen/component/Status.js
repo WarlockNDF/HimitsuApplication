@@ -35,33 +35,38 @@ const Status = ({ navigation }) => {
 
   useEffect(() => {
     getOrder();
-  }, [{navigation}]);
+  }, [{ navigation }]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <VStack mt={10} w="100%" h="100%" space={"xs"}>
+    <SafeAreaView
+      style={{ backgroundColor: "#fff", flex: 1, alignItems: "center" }}
+    >
+      <VStack style={{ flex: 1 }}>
         <View>
-          <Heading ml={5}>STATUS</Heading>
+          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
+            STATUS
+          </Text>
         </View>
-        <Center>
-          <ScrollView height="xl" marginTop={'10'}>
-            {orders.map((orderdata, index) => {
-              const { OrderID, Status, OrderDate } = orderdata;
-              return (
-                <>
-                  <StatusCard
-                    key={OrderID + index}
-                    navigation={navigation}
-                    orderID={OrderID}
-                    orderDate={OrderDate}
-                    status={Status}
-                  />
-                </>
-              );
-            })}
-          </ScrollView>
-        </Center>
       </VStack>
+
+      <View style={{ flex: 9 }}>
+        <ScrollView>
+          {orders.map((orderdata, index) => {
+            const { OrderID, Status, OrderDate } = orderdata;
+            return (
+              <>
+                <StatusCard
+                  key={OrderID + index}
+                  navigation={navigation}
+                  orderID={OrderID}
+                  orderDate={OrderDate}
+                  status={Status}
+                />
+              </>
+            );
+          })}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -72,8 +77,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
   },
 });

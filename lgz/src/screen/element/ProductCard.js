@@ -25,7 +25,7 @@ const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,
       {({ isHovered, isFocused, isPressed }) => {
         return (
           <Box
-            width={96}
+            width={'sm'}
             borderWidth="1"
             borderColor="coolGray.300"
             shadow="3"
@@ -34,7 +34,7 @@ const ProductCard = ({navigation, name, typeName, productId, numberOfStock, bbe,
                 ? "coolGray.200"
                 : isHovered
                 ? "coolGray.200"
-                : "coolGray.100"
+                : "#FFFF"
             }
             p="5"
             rounded="8"

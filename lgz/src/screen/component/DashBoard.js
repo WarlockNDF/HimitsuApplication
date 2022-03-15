@@ -127,7 +127,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -175,7 +175,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -225,7 +225,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"
@@ -273,7 +273,7 @@ const DashBoard = ({ navigation }) => {
                       ? "coolGray.200"
                       : isHovered
                       ? "coolGray.200"
-                      : "coolGray.100"
+                      : "white"
                   }
                   p="5"
                   m="2"

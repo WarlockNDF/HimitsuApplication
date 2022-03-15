@@ -43,7 +43,7 @@ const Status = ({ navigation }) => {
     >
       <VStack style={{ flex: 1 }}>
         <View>
-          <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 20 }}>
+          <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 25 }}>
             STATUS
           </Text>
         </View>

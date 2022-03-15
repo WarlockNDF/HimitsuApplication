@@ -15,14 +15,16 @@ import {
   Select,
   ScrollView,
   HStack,
+  Stack,
 } from "native-base";
 import http from "../../service/http";
 
 const OrderDetail = ({ navigation, route }) => {
-  const { ID } = route.params;
+  const { ID, status } = route.params;
   const [orderBasicInfo, setOrderBasicInfo] = useState([]);
   const [orderDetails, setOrderDeatils] = useState([]);
   const [orderTotal, setOrderTotal] = useState([]);
+  let updateData = [];
 
   const getDetail = async () => {
     try {
@@ -38,8 +40,44 @@ const OrderDetail = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    getDetail();
+  const updateStock = async () => {
+    let updateData = [];
+    orderDetails.forEach((data) => {
+      updateData.push({
+        productId: data.ProductID,
+        quantity: data.quantity,
+      });
+    });
+    console.log(updateData);
+    await http
+      .post("stock", updateData)
+      .then(async (res) => {
+        console.log(res.data);
+        console.log(res.data.message);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Can't Update/Insert Stock!!");
+      });
+  };
+
+
+  const updateStatus = async ()=>{
+
+    await http
+      .put("order/confirm", {OrderID:orderBasicInfo.OrderID, Status:"SUCCESS"})
+      .then(async (res) => {
+        console.log(res.data);
+        console.log(res.data.message);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Can't Update/Insert Stock!!");
+      });
+  }
+
+  useEffect(async() => {
+    await getDetail();
   }, []);
 
   return (
@@ -107,13 +145,17 @@ const OrderDetail = ({ navigation, route }) => {
 
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity
+            disabled = {status === 'SUCCESS'?true:false}
             style={styles.buttonContainer}
             onPress={() => {
-              alert("confirm order complete");
+              updateStock();
+              updateStatus();
+              alert("CONFIRM ORDER COMPLETE")
+              navigation.navigate("status")
             }}
           >
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-              Confirm Order
+              {status === 'SUCCESS'?"Complete Order":"Confirm Order"}
             </Text>
           </TouchableOpacity>
         </View>

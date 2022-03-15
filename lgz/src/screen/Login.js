@@ -69,6 +69,9 @@ const Login = ({ navigation }) => {
     Notifications.addNotificationReceivedListener( notification => {
       console.log(notification.request.content.data.data);
     })
+    return (() => {
+      Notifications.removeNotificationSubscription(welcomeNotification())
+    })
   },[])
 
   function resetInput(){

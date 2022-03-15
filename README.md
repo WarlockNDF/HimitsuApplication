@@ -17,6 +17,6 @@ _________________
 * Proposal:     https://drive.google.com/file/d/1a8ffn1PCFji14ZgHnKcjNWrb4WPvFtCF/view?usp=sharing
 * Prototype:    https://drive.google.com/file/d/12XMcP25p7lrRhosSC67C6hiCEZt_DPeA/view?usp=sharing
 * User Manual:  https://drive.google.com/file/d/1kfSucFhEYC7rFKOEweHKFcXLpVrlu5pG/view?usp=sharing
-* Poster:       
+* Poster:       https://drive.google.com/file/d/18OA5Vt9EvK6bQQPmHmDv1sJHH0i_3qrb/view?usp=sharing     
 * Video:        
 

@@ -54,12 +54,12 @@ Notifications.setNotificationHandler({
   })
 })
 
-async function welcomeNotification(data) {
+async function expireToday(count) {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "Product In Stock Expire Today",
-      body: "EIEI",
-      data: { data: "World" }
+      body: `มีสินค้าหมดอายุวันนี้จำนวน ${count}`,
+      data: { exprireToday: count }
     },
     trigger: { seconds: 2 }
   })
@@ -67,17 +67,17 @@ async function welcomeNotification(data) {
 
 /* ["20220307","20220309"] */
 const DashBoard = ({ navigation }) => {
+
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [bbeArr, setBbeArr] = useState([]);
 
 
-  let bbeArr = [];
   const bbeAll = async () => {
     try {
       const { status, data } = await http.get('stock')
       if (status !== 200) throw "Can't Get Product"
       setProducts([...data.data])
-      console.log(products);
     } catch (err) {
       console.log(err.messsage);
       alert("ไม่สามารถดึงข้อมูลได้");
@@ -97,9 +97,26 @@ const DashBoard = ({ navigation }) => {
   }
 
 
-  useEffect(() => {
-    bbeAll();
+  useEffect(async() => {
+    await bbeAll();
   }, []);
+
+
+  useEffect( async () => {
+    let temp = [];
+    let notiData = [];
+    products.map((productinf, index) => {
+      // console.log(productinf);
+      const { BBE } = productinf;
+      let tempDate = new Date(BBE)
+      if(tempDate.toISOString().split('T')[0] === BBE.split('T')[0]){
+        notiData.push(productinf)
+      }
+      temp.push(tempDate.toISOString());
+    })
+    setBbeArr([...temp])
+    if (notiData.length > 0) await expireToday(notiData.length)
+  }, [products])
 
 
 
@@ -111,16 +128,14 @@ const DashBoard = ({ navigation }) => {
         </Text>
         <View style={{ alignItems: "center" }}>
           <Box borderWidth="2" borderColor="coolGray.300" bgColor="white">
-            {
-              products.map((productinf, index) => {
-                const { BBE } = productinf;
-                bbeArr.push(moment(new Date(BBE)).format("L"));
-              })
-            }
             <CalendarPicker width={330} minDate={moment().startOf('month')}
               maxDate={moment().endOf('month')} customDatesStyles={datepick(bbeArr)}
               onDateChange={async (date) => {
                 await bbeData(new Date(date).toISOString())
+                console.log(`BBE: ${bbeinfo.length}`);
+                // bbeinfo.forEach((data) => {
+                //   console.log(`BBEDATA : ${data}`);
+                // })
                 if (bbeinfo.length === 0) return
                 setShowModal(true);
               }} />
@@ -354,7 +369,7 @@ const DashBoard = ({ navigation }) => {
               }
             </Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => { setShowModal(false); }}>
+              <Button onPress={() => { setShowModal(false); setbbeinfo([]) }}>
                 close
               </Button>
             </Modal.Footer>

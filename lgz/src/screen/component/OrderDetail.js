@@ -124,7 +124,7 @@ const OrderDetail = ({ navigation, route }) => {
                     {supplier.Location} {supplier.PhoneNumber}
                   </Text>
                   <Text style={{ fontSize: 15, marginBottom: 5 }}>
-                    Total = {productTotal} Baht.
+                    Total = {productTotal} Baht
                   </Text>
                 </View>
                 <View style={styles.line} />

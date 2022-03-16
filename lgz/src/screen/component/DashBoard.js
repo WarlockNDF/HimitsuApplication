@@ -106,8 +106,9 @@ const DashBoard = ({ navigation }) => {
     products.map((productinf, index) => {
       // console.log(productinf);
       const { BBE } = productinf;
-      let tempDate = new Date();
-      if (tempDate.toISOString().split("T")[0] === BBE.split("T")[0]) {
+      let tempDate = new Date(BBE);
+      let notiInfo = new Date();
+      if (notiInfo.toISOString().split("T")[0] === BBE.split("T")[0]) {
         notiData.push(productinf);
         count++
       }
